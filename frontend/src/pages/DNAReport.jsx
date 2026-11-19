@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   Dna,
   FileText,
@@ -8,224 +9,518 @@ import {
   Activity,
   Clock,
   ExternalLink,
+  ChevronDown,
+  History,
+  BookOpen,
+  Microscope,
+  Scale,
+  Languages,
+  Image,
+  Lock,
+  Info,
 } from 'lucide-react'
 
 function DNAReport() {
-  const diagnosticModules = [
-    'Claim Extraction',
-    'Credibility Scoring',
-    'Emotional Manipulation Detection',
-    'Logical Fallacy Scanning',
-    'Source and Author Analysis',
-    'Contextual Bias and Framing Analysis',
-  ]
+  const [expandedModules, setExpandedModules] = useState([])
 
-  const reportSections = [
+  const diagnosticModules = [
     {
-      title: 'Claim Verification',
-      description: 'Evidence-based factual claim investigation.',
+      title: 'Claim Extraction and Verification',
+      description:
+        'Identifies individual factual claims and evaluates them against available evidence.',
       icon: Search,
     },
     {
-      title: 'Source Intelligence',
-      description: 'Source credibility and provenance investigation.',
-      icon: Globe,
-    },
-    {
-      title: 'Media Forensics',
-      description: 'Image and video authenticity indicators.',
+      title: 'Credibility Scoring',
+      description:
+        'Examines source reliability, evidence quality and available credibility indicators.',
       icon: ShieldCheck,
     },
     {
-      title: 'Evidence Analysis',
-      description: 'Supporting evidence and conflicting information.',
-      icon: FileText,
+      title: 'Emotional Manipulation Detection',
+      description:
+        'Identifies urgency, fear, outrage and other persuasive emotional patterns.',
+      icon: Activity,
+    },
+    {
+      title: 'Logical Fallacy Scanning',
+      description:
+        'Examines reasoning patterns for common logical fallacies and unsupported conclusions.',
+      icon: Scale,
+    },
+    {
+      title: 'Source and Author Analysis',
+      description:
+        'Investigates identifiable publishers, authors and publicly available source information.',
+      icon: Globe,
+    },
+    {
+      title: 'Contextual Bias and Framing',
+      description:
+        'Examines framing, missing context and potential political or communal bias.',
+      icon: Languages,
     },
   ]
 
+  const outcomes = [
+    'Supported',
+    'False / Contradicted',
+    'Misleading / Out of Context',
+    'Conflicting Evidence',
+    'Unverified',
+    'Insufficient Evidence',
+  ]
+
+  const toggleModule = (index) => {
+    setExpandedModules((previous) =>
+      previous.includes(index)
+        ? previous.filter((item) => item !== index)
+        : [...previous, index]
+    )
+  }
+
   return (
-    <div className="space-y-7">
+    <div className="max-w-7xl mx-auto space-y-7">
 
-      {/* Introduction */}
-      <section>
-        <div className="flex items-center gap-3 mb-3">
+      {/* Report Header */}
+      <section className="space-y-4">
 
-          <div className="p-3 rounded-xl bg-cyan-500/10">
-            <Dna className="text-cyan-400" size={27} />
-          </div>
+        <div className="flex flex-wrap items-center justify-between gap-3">
 
-          <div>
-            <h1 className="text-xl font-semibold">
-              Misinformation DNA Report
-            </h1>
+          <div className="flex items-center gap-2 text-xs text-gray-400">
+            <ShieldCheck size={16} className="text-cyan-400" />
 
-            <p className="text-xs text-gray-500">
-              EVIDENCE-BASED INVESTIGATION REPORT
-            </p>
-          </div>
-
-        </div>
-
-        <p className="text-sm text-gray-400 max-w-3xl leading-6">
-          A structured investigation report combining claim
-          verification, credibility analysis, emotional manipulation,
-          logical fallacies, source provenance and media intelligence.
-        </p>
-      </section>
-
-      {/* Empty Report State */}
-      <section className="bg-[#111827] border border-gray-800 rounded-xl p-10 text-center">
-
-        <div className="w-16 h-16 mx-auto rounded-2xl bg-cyan-500/10 flex items-center justify-center mb-5">
-          <Dna className="text-cyan-400" size={34} />
-        </div>
-
-        <h2 className="text-xl font-semibold mb-3">
-          No Investigation Reports Yet
-        </h2>
-
-        <p className="text-sm text-gray-400 max-w-lg mx-auto leading-6">
-          Your investigation reports will appear here after
-          completing a text, image or video investigation.
-          Each report will contain findings, evidence and
-          uncertainty information.
-        </p>
-
-        <div className="inline-flex items-center gap-2 mt-6 px-4 py-2 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 text-xs">
-          <Clock size={14} />
-          WAITING FOR FIRST INVESTIGATION
-        </div>
-
-      </section>
-
-      {/* Report Structure */}
-      <section>
-
-        <div className="mb-5">
-          <h2 className="text-lg font-semibold">
-            DNA Report Structure
-          </h2>
-
-          <p className="text-xs text-gray-500 mt-1">
-            Information included in a completed investigation report.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-
-          {reportSections.map((section) => {
-            const Icon = section.icon
-
-            return (
-              <div
-                key={section.title}
-                className="bg-[#111827] border border-gray-800 rounded-xl p-5"
-              >
-
-                <div className="flex items-center gap-3 mb-3">
-                  <Icon className="text-cyan-400" size={22} />
-
-                  <h3 className="font-semibold">
-                    {section.title}
-                  </h3>
-                </div>
-
-                <p className="text-sm text-gray-400">
-                  {section.description}
-                </p>
-
-              </div>
-            )
-          })}
-
-        </div>
-
-      </section>
-
-      {/* Diagnostic Modules */}
-      <section className="bg-[#111827] border border-gray-800 rounded-xl p-6">
-
-        <div className="flex items-center gap-3 mb-5">
-          <Activity className="text-purple-400" size={22} />
-
-          <h2 className="font-semibold">
-            Six Diagnostic Modules
-          </h2>
-        </div>
-
-        <div className="space-y-3">
-
-          {diagnosticModules.map((module, index) => (
-
-            <div
-              key={module}
-              className="flex items-center gap-4 bg-[#080b14] border border-gray-800 rounded-lg p-4"
-            >
-
-              <span className="text-xs text-cyan-400 font-mono">
-                0{index + 1}
-              </span>
-
-              <span className="text-sm text-gray-300">
-                {module}
-              </span>
-
-            </div>
-
-          ))}
-
-        </div>
-
-      </section>
-
-      {/* Possible Findings */}
-      <section className="bg-[#111827] border border-gray-800 rounded-xl p-6">
-
-        <div className="flex items-center gap-3 mb-5">
-          <AlertTriangle className="text-yellow-400" size={22} />
-
-          <h2 className="font-semibold">
-            Claim Investigation Outcomes
-          </h2>
-        </div>
-
-        <div className="flex flex-wrap gap-3">
-
-          {[
-            'Supported',
-            'False / Contradicted',
-            'Misleading / Out of Context',
-            'Conflicting Evidence',
-            'Unverified',
-            'Insufficient Evidence',
-          ].map((outcome) => (
-
-            <span
-              key={outcome}
-              className="px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-xs text-gray-300"
-            >
-              {outcome}
+            <span className="text-cyan-400 font-mono">
+              GLUCO INVESTIGATION ENGINE
             </span>
 
-          ))}
+            <span>/</span>
+            <span>DNA Reports</span>
+          </div>
+
+          <div className="flex items-center gap-2 text-xs text-yellow-400">
+            <span className="w-2 h-2 rounded-full bg-yellow-400" />
+            REPORT ENGINE UNDER DEVELOPMENT
+          </div>
 
         </div>
 
-        <p className="text-xs text-gray-500 mt-5 leading-6">
-          These are possible claim-level findings, not a single
-          overall truth score. Each finding will be accompanied
-          by evidence and relevant limitations.
-        </p>
+        <div>
+          <div className="flex items-center gap-3 mb-3">
+
+            <div className="p-3 rounded-xl bg-cyan-500/10">
+              <Dna className="text-cyan-400" size={28} />
+            </div>
+
+            <div>
+              <h1 className="text-2xl font-semibold">
+                Misinformation DNA Report
+              </h1>
+
+              <p className="text-xs text-gray-500 mt-1 font-mono">
+                EVIDENCE-BASED INVESTIGATION RECORD
+              </p>
+            </div>
+
+          </div>
+
+          <p className="text-sm text-gray-400 max-w-3xl leading-6">
+            A structured investigation record combining factual claim
+            verification, source intelligence, media forensics,
+            contextual analysis and supporting evidence.
+          </p>
+        </div>
 
       </section>
 
       {/* Report Status */}
+      <section className="bg-[#111827] border border-gray-800 rounded-xl p-6">
+
+        <div className="flex flex-col lg:flex-row justify-between gap-6">
+
+          <div className="space-y-3">
+
+            <div className="flex flex-wrap items-center gap-2">
+
+              <span className="flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 text-xs">
+                <Clock size={14} />
+                No Report Available
+              </span>
+
+              <span className="px-3 py-1 rounded-full bg-gray-800 text-gray-400 text-xs">
+                Waiting for Investigation
+              </span>
+
+            </div>
+
+            <h2 className="text-xl font-semibold">
+              No Investigation Selected
+            </h2>
+
+            <p className="text-sm text-gray-400 max-w-2xl leading-6">
+              Complete a text, image or video investigation to
+              generate a detailed Misinformation DNA Report.
+              Findings and evidence will appear here once
+              the analysis engine is connected.
+            </p>
+
+          </div>
+
+          <div className="flex items-center justify-center min-w-32">
+
+            <div className="w-20 h-20 rounded-2xl bg-cyan-500/10 flex items-center justify-center">
+              <Dna size={42} className="text-cyan-400" />
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* Main Report Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+
+        {/* Main Investigation Area */}
+        <div className="lg:col-span-8 space-y-5">
+
+          {/* Executive Summary */}
+          <section className="bg-[#111827] border border-gray-800 rounded-xl p-6">
+
+            <div className="flex items-center gap-3 mb-5">
+
+              <FileText size={21} className="text-cyan-400" />
+
+              <h2 className="font-semibold">
+                Executive Investigation Summary
+              </h2>
+
+            </div>
+
+            <div className="bg-[#080b14] border border-dashed border-gray-700 rounded-lg p-6 text-center">
+
+              <Info size={25} className="text-gray-500 mx-auto mb-3" />
+
+              <p className="text-sm text-gray-400">
+                The investigation summary will appear here
+                after a completed analysis.
+              </p>
+
+            </div>
+
+          </section>
+
+          {/* Claim-Level Breakdown */}
+          <section className="bg-[#111827] border border-gray-800 rounded-xl p-6">
+
+            <div className="flex items-center justify-between mb-5">
+
+              <div className="flex items-center gap-3">
+                <Search size={21} className="text-cyan-400" />
+
+                <h2 className="font-semibold">
+                  Specific Claims Tested
+                </h2>
+              </div>
+
+              <span className="text-xs text-gray-500 font-mono">
+                0 CLAIMS
+              </span>
+
+            </div>
+
+            <div className="bg-[#080b14] border border-dashed border-gray-700 rounded-lg p-5 text-center">
+
+              <p className="text-sm text-gray-500">
+                Individual factual claims and their evidence-based
+                findings will be displayed here.
+              </p>
+
+            </div>
+
+          </section>
+
+          {/* Six Diagnostic Dimensions */}
+          <section className="bg-[#111827] border border-gray-800 rounded-xl p-6">
+
+            <div className="flex flex-wrap justify-between items-center gap-3 mb-5">
+
+              <div className="flex items-center gap-3">
+                <Microscope size={22} className="text-cyan-400" />
+
+                <h2 className="font-semibold">
+                  Six Forensic Diagnostic Dimensions
+                </h2>
+              </div>
+
+              <span className="text-xs text-gray-500">
+                Click to expand
+              </span>
+
+            </div>
+
+            <div className="space-y-2">
+
+              {diagnosticModules.map((module, index) => {
+                const Icon = module.icon
+                const isExpanded = expandedModules.includes(index)
+
+                return (
+                  <div
+                    key={module.title}
+                    className="bg-[#080b14] border border-gray-800 rounded-lg overflow-hidden"
+                  >
+
+                    <button
+                      onClick={() => toggleModule(index)}
+                      className="w-full flex items-center justify-between gap-3 p-4 text-left hover:bg-gray-800/50 transition"
+                    >
+
+                      <div className="flex items-center gap-3 min-w-0">
+
+                        <Icon
+                          size={19}
+                          className="text-cyan-400 shrink-0"
+                        />
+
+                        <div className="min-w-0">
+
+                          <p className="text-sm text-gray-200 font-medium">
+                            {module.title}
+                          </p>
+
+                          <p className="text-xs text-gray-500 mt-1">
+                            Diagnostic Module 0{index + 1}
+                          </p>
+
+                        </div>
+
+                      </div>
+
+                      <ChevronDown
+                        size={18}
+                        className={`text-gray-500 shrink-0 transition-transform ${
+                          isExpanded ? 'rotate-180' : ''
+                        }`}
+                      />
+
+                    </button>
+
+                    {isExpanded && (
+                      <div className="px-4 pb-4 pt-1 border-t border-gray-800">
+
+                        <p className="text-sm text-gray-400 leading-6">
+                          {module.description}
+                        </p>
+
+                        <p className="text-xs text-yellow-400 mt-3">
+                          Analysis results will appear after backend integration.
+                        </p>
+
+                      </div>
+                    )}
+
+                  </div>
+                )
+              })}
+
+            </div>
+
+          </section>
+
+          {/* Source Provenance */}
+          <section className="bg-[#111827] border border-gray-800 rounded-xl p-6">
+
+            <div className="flex items-center gap-3 mb-5">
+
+              <History size={22} className="text-cyan-400" />
+
+              <h2 className="font-semibold">
+                Source Provenance & Mutation History
+              </h2>
+
+            </div>
+
+            <div className="bg-[#080b14] border border-dashed border-gray-700 rounded-lg p-6 text-center">
+
+              <Globe size={25} className="text-gray-500 mx-auto mb-3" />
+
+              <p className="text-sm text-gray-400">
+                Publicly discoverable source references and
+                available content history will appear here.
+              </p>
+
+              <p className="text-xs text-gray-500 mt-2">
+                The earliest source found will not necessarily
+                be the original source.
+              </p>
+
+            </div>
+
+          </section>
+
+        </div>
+
+        {/* Evidence Sidebar */}
+        <aside className="lg:col-span-4 space-y-5">
+
+          {/* Claim Outcomes */}
+          <section className="bg-[#111827] border border-gray-800 rounded-xl p-5">
+
+            <div className="flex items-center gap-3 mb-4">
+
+              <Scale size={20} className="text-cyan-400" />
+
+              <h3 className="font-semibold">
+                Claim Investigation Outcomes
+              </h3>
+
+            </div>
+
+            <div className="space-y-2">
+
+              {outcomes.map((outcome) => (
+
+                <div
+                  key={outcome}
+                  className="px-3 py-2 rounded-lg bg-[#080b14] border border-gray-800 text-xs text-gray-400"
+                >
+                  {outcome}
+                </div>
+
+              ))}
+
+            </div>
+
+            <p className="text-xs text-gray-500 leading-5 mt-4">
+              Findings are assigned to individual claims.
+              Unverified does not automatically mean false.
+            </p>
+
+          </section>
+
+          {/* Primary Evidence */}
+          <section className="bg-[#111827] border border-gray-800 rounded-xl p-5">
+
+            <div className="flex items-center gap-3 mb-4">
+
+              <BookOpen size={20} className="text-cyan-400" />
+
+              <h3 className="font-semibold">
+                Primary Evidence Sources
+              </h3>
+
+            </div>
+
+            <div className="bg-[#080b14] border border-dashed border-gray-700 rounded-lg p-5 text-center">
+
+              <FileText size={24} className="text-gray-500 mx-auto mb-3" />
+
+              <p className="text-xs text-gray-400">
+                Supporting sources and reference links
+                will be listed here.
+              </p>
+
+            </div>
+
+          </section>
+
+          {/* Forward vs Reality */}
+          <section className="bg-[#111827] border border-gray-800 rounded-xl p-5">
+
+            <div className="flex items-center gap-3 mb-4">
+
+              <Activity size={20} className="text-purple-400" />
+
+              <h3 className="font-semibold">
+                Claim vs Evidence
+              </h3>
+
+            </div>
+
+            <p className="text-sm text-gray-400 leading-6">
+              GLUCO will compare submitted claims against
+              available evidence and relevant context.
+            </p>
+
+            <div className="mt-4 space-y-3">
+
+              <div className="bg-[#080b14] rounded-lg p-3">
+                <p className="text-xs text-red-400 font-medium mb-1">
+                  SUBMITTED CLAIM
+                </p>
+
+                <p className="text-xs text-gray-500">
+                  Original claim will appear here.
+                </p>
+              </div>
+
+              <div className="bg-[#080b14] rounded-lg p-3">
+                <p className="text-xs text-green-400 font-medium mb-1">
+                  AVAILABLE EVIDENCE
+                </p>
+
+                <p className="text-xs text-gray-500">
+                  Supporting or conflicting evidence will appear here.
+                </p>
+              </div>
+
+            </div>
+
+          </section>
+
+          {/* Limitations */}
+          <section className="bg-[#111827] border border-gray-800 rounded-xl p-5">
+
+            <div className="flex items-center gap-3 mb-4">
+
+              <Lock size={19} className="text-cyan-400" />
+
+              <h3 className="font-semibold">
+                Limitations & Scope
+              </h3>
+
+            </div>
+
+            <div className="space-y-3 text-xs text-gray-400 leading-5">
+
+              <p>
+                • Findings depend on the quality and availability
+                of supporting evidence.
+              </p>
+
+              <p>
+                • Missing metadata does not prove manipulation.
+              </p>
+
+              <p>
+                • Media authenticity and factual accuracy are
+                investigated separately.
+              </p>
+
+              <p>
+                • Source tracing identifies publicly discoverable
+                references, not necessarily the original creator.
+              </p>
+
+            </div>
+
+          </section>
+
+        </aside>
+
+      </div>
+
+      {/* Backend Status */}
       <div className="flex items-center gap-3 bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
 
-        <AlertTriangle className="text-yellow-400 shrink-0" size={19} />
+        <AlertTriangle
+          className="text-yellow-400 shrink-0"
+          size={19}
+        />
 
         <p className="text-xs text-yellow-400">
-          REPORT GENERATION ENGINE: BACKEND INTEGRATION PENDING
+          DNA REPORT GENERATION ENGINE: BACKEND INTEGRATION PENDING
         </p>
 
       </div>

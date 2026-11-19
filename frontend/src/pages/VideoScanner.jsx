@@ -1,267 +1,546 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   Video,
   Upload,
-  ScanSearch,
-  Trash2,
+  Link,
+  Download,
   Film,
-  AudioLines,
   ShieldCheck,
+  AudioLines,
   AlertCircle,
-  Clock,
+  Trash2,
+  Search,
+  Lock,
+  FileVideo,
+  CheckCircle2,
 } from 'lucide-react'
 
 function VideoScanner() {
+  const [activeTab, setActiveTab] = useState('upload')
   const [video, setVideo] = useState(null)
   const [preview, setPreview] = useState(null)
+  const [videoUrl, setVideoUrl] = useState('')
+  const [message, setMessage] = useState('')
+
+  const fileInputRef = useRef(null)
 
   useEffect(() => {
     return () => {
-      if (preview) {
-        URL.revokeObjectURL(preview)
-      }
+      if (preview) URL.revokeObjectURL(preview)
     }
   }, [preview])
 
-  const handleVideoUpload = (event) => {
-    const file = event.target.files[0]
-
+  const handleVideoUpload = (file) => {
     if (!file) return
 
     if (!file.type.startsWith('video/')) {
-      alert('Please upload a valid video file.')
+      setMessage('Please select a valid video file.')
       return
     }
 
     if (file.size > 100 * 1024 * 1024) {
-      alert('Video size must be less than 100 MB.')
+      setMessage('Video size must not exceed 100 MB.')
       return
     }
 
-    if (preview) {
-      URL.revokeObjectURL(preview)
-    }
+    if (preview) URL.revokeObjectURL(preview)
 
     setVideo(file)
     setPreview(URL.createObjectURL(file))
+    setMessage('')
   }
 
   const clearVideo = () => {
     setVideo(null)
     setPreview(null)
+    setMessage('')
+    if (fileInputRef.current) fileInputRef.current.value = ''
   }
 
-  const handleAnalyze = () => {
-    if (!video) return
+  const handleInvestigate = () => {
+    if (activeTab === 'upload' && !video) {
+      setMessage('Please upload a video first.')
+      return
+    }
 
-    alert('Video Scanner interface is ready. Backend analysis is not connected yet.')
+    if (activeTab === 'url' && !videoUrl.trim()) {
+      setMessage('Please enter a video URL first.')
+      return
+    }
+
+    setMessage(
+      'Video analysis is not connected yet. Backend integration is pending.'
+    )
+  }
+
+  const handleFetchUrl = () => {
+    if (!videoUrl.trim()) {
+      setMessage('Please enter a video URL.')
+      return
+    }
+
+    try {
+      const parsedUrl = new URL(videoUrl)
+
+      if (!['http:', 'https:'].includes(parsedUrl.protocol)) {
+        throw new Error('Invalid URL')
+      }
+
+      setMessage(
+        'URL received. Automatic video retrieval is not implemented yet.'
+      )
+    } catch {
+      setMessage('Please enter a valid URL.')
+    }
   }
 
   return (
     <div className="space-y-7">
 
-      {/* Introduction */}
-      <section>
-        <div className="flex items-center gap-3 mb-3">
+      {/* Header */}
+      <section className="flex flex-col md:flex-row md:items-end justify-between gap-5">
 
-          <div className="p-3 rounded-xl bg-purple-500/10">
-            <Video className="text-purple-400" size={25} />
+        <div>
+          <div className="flex items-center gap-2 text-primary text-xs font-semibold tracking-widest uppercase mb-3">
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+            Forensic Media Verification
+            <span className="text-outline">•</span>
+            <span className="font-code">MODULE 04</span>
           </div>
 
-          <div>
-            <h1 className="text-xl font-semibold">
-              Video Investigation
-            </h1>
+          <h1 className="text-3xl font-headline font-bold tracking-tight mb-2">
+            Video & Deepfake Scanner
+          </h1>
 
-            <p className="text-xs text-gray-500">
-              VIDEO FORENSICS MODULE
-            </p>
-          </div>
-
-        </div>
-
-        <p className="text-sm text-gray-400 max-w-3xl leading-6">
-          Investigate suspicious viral videos, news clips and
-          social media footage. The system is designed to examine
-          video frames, extract spoken content and investigate
-          the context and authenticity of the media.
-        </p>
-      </section>
-
-      {/* Upload Panel */}
-      <section className="bg-[#111827] border border-gray-800 rounded-xl p-6">
-
-        <div className="mb-5">
-          <h2 className="font-semibold">
-            Upload Video
-          </h2>
-
-          <p className="text-xs text-gray-500 mt-1">
-            Supported formats depend on your browser. Maximum 100 MB.
+          <p className="text-on-surface-variant max-w-2xl leading-7">
+            Investigate viral video clips, speech recordings and news
+            broadcasts for manipulated context and potential synthetic media.
           </p>
         </div>
 
-        {!preview ? (
+        <div className="flex items-center gap-3 p-4 rounded-xl bg-surface-container-low border border-outline-variant/20">
 
-          <label className="flex flex-col items-center justify-center border-2 border-dashed border-gray-700 hover:border-purple-500 rounded-xl p-12 cursor-pointer transition bg-[#080b14]">
+          <ShieldCheck className="text-tertiary" size={25} />
 
-            <Upload size={36} className="text-purple-400 mb-4" />
-
-            <h3 className="text-sm font-semibold mb-2">
-              Drop your video here or browse
-            </h3>
-
-            <p className="text-xs text-gray-500">
-              Upload a video for investigation
+          <div>
+            <p className="text-sm font-semibold">Investigation Workspace</p>
+            <p className="text-xs text-on-surface-variant font-code">
+              Backend integration pending
             </p>
+          </div>
 
-            <input
-              type="file"
-              accept="video/mp4,video/webm,video/quicktime,video/x-msvideo"
-              onChange={handleVideoUpload}
-              className="hidden"
-            />
+        </div>
 
-          </label>
+      </section>
 
-        ) : (
+      {/* Main Workspace */}
+      <section className="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-          <div className="bg-[#080b14] border border-gray-700 rounded-xl p-5">
+        {/* Left Workspace */}
+        <div className="lg:col-span-8">
 
-            <div className="flex justify-between items-center mb-4">
+          <div className="bg-surface-container-low border border-outline-variant/20 rounded-2xl p-5 md:p-7 space-y-6">
 
-              <h3 className="text-sm font-semibold text-purple-400">
-                VIDEO PREVIEW
-              </h3>
+            {/* Tabs */}
+            <div className="flex flex-wrap items-center justify-between gap-4">
+
+              <div className="flex gap-1 p-1 rounded-xl bg-surface-container">
+
+                <button
+                  onClick={() => {
+                    setActiveTab('upload')
+                    setMessage('')
+                  }}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition ${
+                    activeTab === 'upload'
+                      ? 'bg-surface-container-highest text-on-surface'
+                      : 'text-on-surface-variant hover:text-on-surface'
+                  }`}
+                >
+                  <Upload size={16} />
+                  Upload Clip
+                </button>
+
+                <button
+                  onClick={() => {
+                    setActiveTab('url')
+                    setMessage('')
+                  }}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition ${
+                    activeTab === 'url'
+                      ? 'bg-surface-container-highest text-on-surface'
+                      : 'text-on-surface-variant hover:text-on-surface'
+                  }`}
+                >
+                  <Link size={16} />
+                  Web & Social Link
+                </button>
+
+              </div>
+
+              <div className="flex items-center gap-2 text-xs text-on-surface-variant">
+                <Lock size={14} />
+                Local preview only
+              </div>
+
+            </div>
+
+            {/* Upload Tab */}
+            {activeTab === 'upload' && (
+
+              <div className="space-y-5">
+
+                {!preview ? (
+
+                  <label
+                    onDragOver={(event) => event.preventDefault()}
+                    onDrop={(event) => {
+                      event.preventDefault()
+                      handleVideoUpload(event.dataTransfer.files[0])
+                    }}
+                    className="flex flex-col items-center justify-center text-center min-h-64 p-8 rounded-xl border-2 border-dashed border-outline-variant hover:border-primary bg-surface-container transition cursor-pointer"
+                  >
+
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      accept="video/mp4,video/quicktime,video/x-matroska,video/webm"
+                      onChange={(event) =>
+                        handleVideoUpload(event.target.files[0])
+                      }
+                      className="hidden"
+                    />
+
+                    <div className="w-16 h-16 rounded-2xl bg-surface-container-highest flex items-center justify-center text-primary mb-5">
+                      <Film size={30} />
+                    </div>
+
+                    <h3 className="text-lg font-semibold mb-2">
+                      Upload a video file
+                    </h3>
+
+                    <p className="text-sm text-on-surface-variant mb-5">
+                      Drag and drop your video or browse local files.
+                    </p>
+
+                    <span className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-on-primary text-sm font-semibold">
+                      <Upload size={16} />
+                      Browse Videos
+                    </span>
+
+                    <p className="text-xs text-outline mt-5 font-code">
+                      MP4 · MOV · MKV · WEBM · MAX 100 MB
+                    </p>
+
+                  </label>
+
+                ) : (
+
+                  <div className="rounded-xl overflow-hidden bg-surface-container border border-outline-variant/30">
+
+                    <div className="flex justify-between items-center p-4 border-b border-outline-variant/20">
+
+                      <div className="flex items-center gap-2 text-primary text-sm font-semibold">
+                        <FileVideo size={18} />
+                        VIDEO PREVIEW
+                      </div>
+
+                      <button
+                        onClick={clearVideo}
+                        className="flex items-center gap-2 text-xs text-on-surface-variant hover:text-error"
+                      >
+                        <Trash2 size={16} />
+                        Remove
+                      </button>
+
+                    </div>
+
+                    <div className="bg-surface-container-lowest">
+
+                      <video
+                        src={preview}
+                        controls
+                        className="w-full max-h-[420px]"
+                      />
+
+                    </div>
+
+                    <div className="p-4 space-y-2">
+
+                      <p className="text-sm font-semibold break-all">
+                        {video.name}
+                      </p>
+
+                      <div className="flex flex-wrap gap-4 text-xs text-on-surface-variant font-code">
+
+                        <span>
+                          {(video.size / (1024 * 1024)).toFixed(2)} MB
+                        </span>
+
+                        <span>
+                          {video.type || 'Unknown format'}
+                        </span>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                )}
+
+                {/* URL Input */}
+                <div className="space-y-3">
+
+                  <p className="text-xs text-on-surface-variant font-semibold">
+                    OR PROVIDE A VIDEO LINK
+                  </p>
+
+                  <div className="flex flex-col sm:flex-row gap-3">
+
+                    <div className="flex items-center gap-3 flex-1 px-4 h-12 rounded-xl bg-surface-container border border-outline-variant/20">
+                      <Link size={18} className="text-outline shrink-0" />
+
+                      <input
+                        type="url"
+                        value={videoUrl}
+                        onChange={(event) => setVideoUrl(event.target.value)}
+                        placeholder="Paste a public video URL..."
+                        className="w-full bg-transparent text-sm outline-none placeholder:text-outline"
+                      />
+
+                    </div>
+
+                    <button
+                      onClick={() => {
+                        setActiveTab('url')
+                        handleFetchUrl()
+                      }}
+                      className="flex items-center justify-center gap-2 px-5 h-12 rounded-xl bg-surface-container-high hover:bg-surface-container-highest text-sm font-semibold transition"
+                    >
+                      <Download size={17} />
+                      Use Link
+                    </button>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            )}
+
+            {/* URL Tab */}
+            {activeTab === 'url' && (
+
+              <div className="space-y-5">
+
+                <div className="p-8 rounded-xl bg-surface-container text-center border border-outline-variant/20">
+
+                  <div className="w-16 h-16 mx-auto rounded-2xl bg-surface-container-highest flex items-center justify-center text-primary mb-5">
+                    <Link size={30} />
+                  </div>
+
+                  <h3 className="text-lg font-semibold mb-2">
+                    Investigate a Video Link
+                  </h3>
+
+                  <p className="text-sm text-on-surface-variant max-w-md mx-auto">
+                    Enter a publicly accessible video URL. Automatic
+                    downloading and platform retrieval are not connected yet.
+                  </p>
+
+                </div>
+
+                <div className="space-y-3">
+
+                  <label className="text-sm font-medium">
+                    Video URL
+                  </label>
+
+                  <input
+                    type="url"
+                    value={videoUrl}
+                    onChange={(event) => setVideoUrl(event.target.value)}
+                    placeholder="https://youtube.com/watch?v=..."
+                    className="w-full h-12 px-4 rounded-xl bg-surface-container border border-outline-variant/30 text-sm outline-none focus:border-primary"
+                  />
+
+                  <button
+                    onClick={handleFetchUrl}
+                    className="flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 rounded-xl bg-surface-container-high hover:bg-surface-container-highest text-sm font-semibold transition"
+                  >
+                    <Search size={17} />
+                    Validate Link
+                  </button>
+
+                </div>
+
+              </div>
+
+            )}
+
+            {/* Investigation Button */}
+            <div className="pt-5 border-t border-outline-variant/20">
 
               <button
-                onClick={clearVideo}
-                className="text-gray-400 hover:text-red-400 transition"
+                onClick={handleInvestigate}
+                disabled={activeTab === 'upload' && !video}
+                className="w-full sm:w-auto flex items-center justify-center gap-3 px-7 py-3.5 rounded-xl bg-primary hover:brightness-110 text-on-primary font-semibold disabled:opacity-40 disabled:cursor-not-allowed transition"
               >
-                <Trash2 size={18} />
+                <Video size={19} />
+                Investigate Video
               </button>
 
-            </div>
+              {message && (
+                <p className="mt-4 text-sm text-yellow-400 flex items-start gap-2">
+                  <AlertCircle size={17} className="shrink-0 mt-0.5" />
+                  {message}
+                </p>
+              )}
 
-            <video
-              src={preview}
-              controls
-              className="w-full max-h-96 rounded-lg bg-black"
-            />
-
-            <div className="mt-4 text-xs text-gray-400 break-all">
-              <p>Filename: {video.name}</p>
-
-              <p className="mt-1">
-                Size: {(video.size / (1024 * 1024)).toFixed(2)} MB
-              </p>
-
-              <p className="mt-1">
-                Format: {video.type || 'Unknown'}
-              </p>
             </div>
 
           </div>
 
-        )}
+        </div>
 
-        {/* Actions */}
-        <div className="flex flex-wrap gap-3 mt-6">
+        {/* Right Information Panel */}
+        <div className="lg:col-span-4 space-y-5">
 
-          <button
-            onClick={handleAnalyze}
-            disabled={!video}
-            className="flex items-center gap-2 bg-purple-600 hover:bg-purple-500 disabled:opacity-40 disabled:cursor-not-allowed px-6 py-3 rounded-lg text-sm font-medium transition"
-          >
-            <ScanSearch size={18} />
-            Investigate Video
-          </button>
+          <section className="bg-surface-container-low border border-outline-variant/20 rounded-2xl p-5">
 
-          <button
-            onClick={clearVideo}
-            disabled={!video}
-            className="flex items-center gap-2 border border-gray-700 hover:bg-gray-800 disabled:opacity-40 px-5 py-3 rounded-lg text-sm text-gray-300 transition"
-          >
-            <Trash2 size={17} />
-            Clear Video
-          </button>
+            <div className="flex items-center gap-3 mb-4">
+              <ShieldCheck className="text-primary" size={23} />
+
+              <h2 className="font-semibold">
+                How Video Verification Works
+              </h2>
+            </div>
+
+            <p className="text-sm text-on-surface-variant leading-6 mb-5">
+              The planned video investigation workflow includes multiple
+              independent verification stages.
+            </p>
+
+            <div className="space-y-4">
+
+              <div className="flex gap-3">
+
+                <div className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                  <Film size={17} />
+                </div>
+
+                <div>
+                  <h3 className="text-sm font-semibold">
+                    Frame Examination
+                  </h3>
+
+                  <p className="text-xs text-on-surface-variant leading-5 mt-1">
+                    Extract keyframes and examine visual context and
+                    potential manipulation indicators.
+                  </p>
+                </div>
+
+              </div>
+
+              <div className="flex gap-3">
+
+                <div className="w-8 h-8 rounded-lg bg-secondary/10 text-secondary flex items-center justify-center shrink-0">
+                  <AudioLines size={17} />
+                </div>
+
+                <div>
+                  <h3 className="text-sm font-semibold">
+                    Audio & Speech Analysis
+                  </h3>
+
+                  <p className="text-xs text-on-surface-variant leading-5 mt-1">
+                    Extract spoken content, identify claims and examine
+                    audio-visual consistency.
+                  </p>
+                </div>
+
+              </div>
+
+              <div className="flex gap-3">
+
+                <div className="w-8 h-8 rounded-lg bg-tertiary/10 text-tertiary flex items-center justify-center shrink-0">
+                  <Search size={17} />
+                </div>
+
+                <div>
+                  <h3 className="text-sm font-semibold">
+                    Source Investigation
+                  </h3>
+
+                  <p className="text-xs text-on-surface-variant leading-5 mt-1">
+                    Compare available evidence and search for earlier
+                    publicly discoverable versions.
+                  </p>
+                </div>
+
+              </div>
+
+            </div>
+
+          </section>
+
+          {/* Checklist */}
+          <section className="bg-surface-container-low border border-outline-variant/20 rounded-2xl p-5">
+
+            <h2 className="font-semibold mb-4">
+              Investigation Checklist
+            </h2>
+
+            <div className="space-y-3 text-sm text-on-surface-variant">
+
+              {[
+                'Inspect available video metadata.',
+                'Examine selected video frames.',
+                'Extract and analyse spoken claims.',
+                'Compare audio and visual context.',
+                'Investigate source and provenance.',
+              ].map((item) => (
+
+                <div key={item} className="flex items-start gap-2">
+                  <CheckCircle2 size={16} className="text-tertiary shrink-0 mt-0.5" />
+                  <span>{item}</span>
+                </div>
+
+              ))}
+
+            </div>
+
+          </section>
 
         </div>
 
       </section>
 
-      {/* Investigation Modules */}
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      {/* Important Notice */}
+      <section className="p-5 rounded-xl bg-surface-container-low border border-outline-variant/20 flex items-start gap-4">
 
-        <div className="bg-[#111827] border border-gray-800 rounded-xl p-6">
+        <ShieldCheck size={24} className="text-primary shrink-0" />
 
-          <div className="flex items-center gap-3 mb-4">
-            <Film className="text-purple-400" size={22} />
-
-            <h3 className="font-semibold">
-              Video Intelligence
-            </h3>
-          </div>
-
-          <ul className="space-y-3 text-sm text-gray-400">
-            <li>01. Video Metadata Inspection</li>
-            <li>02. Keyframe Extraction</li>
-            <li>03. Visual Context Analysis</li>
-            <li>04. Frame Manipulation Indicators</li>
-            <li>05. Original Source Investigation</li>
-            <li>06. Cross-Modal Consistency Analysis</li>
-          </ul>
-
-        </div>
-
-        <div className="bg-[#111827] border border-gray-800 rounded-xl p-6">
-
-          <div className="flex items-center gap-3 mb-4">
-            <AudioLines className="text-cyan-400" size={22} />
-
-            <h3 className="font-semibold">
-              Audio Intelligence
-            </h3>
-          </div>
-
-          <ul className="space-y-3 text-sm text-gray-400">
-            <li>01. Audio Extraction</li>
-            <li>02. Speech-to-Text Conversion</li>
-            <li>03. Multilingual Speech Analysis</li>
-            <li>04. Spoken Claim Identification</li>
-            <li>05. Audio-Visual Consistency</li>
-            <li>06. AI-Generated Media Indicators</li>
-          </ul>
-
-        </div>
-
-      </section>
-
-      {/* Guidelines */}
-      <section className="bg-[#111827] border border-gray-800 rounded-xl p-6">
-
-        <div className="flex items-center gap-3 mb-4">
-          <ShieldCheck className="text-cyan-400" size={22} />
-
-          <h3 className="font-semibold">
-            Investigation Guidelines
+        <div>
+          <h3 className="font-semibold mb-1">
+            Responsible Media Investigation
           </h3>
-        </div>
 
-        <ul className="space-y-3 text-sm text-gray-400 leading-6">
-          <li>• Upload the clearest available video.</li>
-          <li>• Preserve the original video whenever possible.</li>
-          <li>• Edited footage is not automatically misinformation.</li>
-          <li>• Media authenticity and factual accuracy are investigated separately.</li>
-          <li>• AI-generated media indicators require additional forensic validation.</li>
-        </ul>
+          <p className="text-sm text-on-surface-variant leading-6">
+            Edited footage is not automatically misinformation.
+            Media authenticity and factual accuracy must be investigated
+            separately. Missing metadata alone does not prove manipulation.
+          </p>
+        </div>
 
       </section>
 
-      {/* Status */}
-      <div className="flex items-center gap-3 bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
+      {/* Backend Status */}
+      <div className="flex items-center gap-3 p-4 rounded-lg bg-yellow-500/5 border border-yellow-500/20">
 
-        <AlertCircle className="text-yellow-400 shrink-0" size={19} />
+        <AlertCircle size={18} className="text-yellow-400 shrink-0" />
 
         <p className="text-xs text-yellow-400">
           VIDEO ANALYSIS ENGINE: BACKEND INTEGRATION PENDING
