@@ -1,11 +1,14 @@
 from fastapi import FastAPI
-
+from app.api.routes.health import router as health_router
+from app.api.routes.analyze import router as analyze_router
 app = FastAPI(
     title="Fake News DNA Tester",
     description="An AI-powered misinformation investigation platform",
     version="1.0.0"
 )
 
+app.include_router(health_router)
+app.include_router(analyze_router)
 
 @app.get("/")
 def home():
