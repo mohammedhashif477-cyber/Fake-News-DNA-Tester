@@ -101,7 +101,7 @@ function VideoScanner() {
       <section className="flex flex-col md:flex-row md:items-end justify-between gap-5">
 
         <div>
-          <div className="flex items-center gap-2 text-primary text-xs font-semibold tracking-widest uppercase mb-3">
+          <div className="flex items-center gap-2 text-primary-strong text-xs font-semibold tracking-widest uppercase mb-3">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
             Forensic Media Verification
             <span className="text-outline">•</span>
@@ -134,24 +134,24 @@ function VideoScanner() {
       </section>
 
       {/* Main Workspace */}
-      <section className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <section className="grid min-w-0 grid-cols-1 xl:grid-cols-12 gap-6">
 
         {/* Left Workspace */}
-        <div className="lg:col-span-8">
+        <div className="min-w-0 xl:col-span-8">
 
           <div className="bg-surface-container-low border border-outline-variant/20 rounded-2xl p-5 md:p-7 space-y-6">
 
             {/* Tabs */}
             <div className="flex flex-wrap items-center justify-between gap-4">
 
-              <div className="flex gap-1 p-1 rounded-xl bg-surface-container">
+              <div className="flex max-w-full flex-wrap gap-1 p-1 rounded-xl bg-surface-container">
 
                 <button
                   onClick={() => {
                     setActiveTab('upload')
                     setMessage('')
                   }}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition ${
+                  className={`flex min-w-0 items-center gap-2 px-3 sm:px-4 py-2 rounded-lg text-sm transition ${
                     activeTab === 'upload'
                       ? 'bg-surface-container-highest text-on-surface'
                       : 'text-on-surface-variant hover:text-on-surface'
@@ -166,7 +166,7 @@ function VideoScanner() {
                     setActiveTab('url')
                     setMessage('')
                   }}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition ${
+                  className={`flex min-w-0 items-center gap-2 px-3 sm:px-4 py-2 rounded-lg text-sm transition ${
                     activeTab === 'url'
                       ? 'bg-surface-container-highest text-on-surface'
                       : 'text-on-surface-variant hover:text-on-surface'
@@ -211,7 +211,7 @@ function VideoScanner() {
                       className="hidden"
                     />
 
-                    <div className="w-16 h-16 rounded-2xl bg-surface-container-highest flex items-center justify-center text-primary mb-5">
+                    <div className="w-16 h-16 rounded-2xl bg-surface-container-highest flex items-center justify-center text-primary-strong mb-5">
                       <Film size={30} />
                     </div>
 
@@ -240,7 +240,7 @@ function VideoScanner() {
 
                     <div className="flex justify-between items-center p-4 border-b border-outline-variant/20">
 
-                      <div className="flex items-center gap-2 text-primary text-sm font-semibold">
+                      <div className="flex items-center gap-2 text-primary-strong text-sm font-semibold">
                         <FileVideo size={18} />
                         VIDEO PREVIEW
                       </div>
@@ -298,7 +298,7 @@ function VideoScanner() {
 
                   <div className="flex flex-col sm:flex-row gap-3">
 
-                    <div className="flex items-center gap-3 flex-1 px-4 h-12 rounded-xl bg-surface-container border border-outline-variant/20">
+                    <div className="flex min-w-0 items-center gap-3 flex-1 px-4 h-12 rounded-xl bg-surface-container border border-outline-variant/20">
                       <Link size={18} className="text-outline shrink-0" />
 
                       <input
@@ -337,7 +337,7 @@ function VideoScanner() {
 
                 <div className="p-8 rounded-xl bg-surface-container text-center border border-outline-variant/20">
 
-                  <div className="w-16 h-16 mx-auto rounded-2xl bg-surface-container-highest flex items-center justify-center text-primary mb-5">
+                  <div className="w-16 h-16 mx-auto rounded-2xl bg-surface-container-highest flex items-center justify-center text-primary-strong mb-5">
                     <Link size={30} />
                   </div>
 
@@ -393,7 +393,7 @@ function VideoScanner() {
               </button>
 
               {message && (
-                <p className="mt-4 text-sm text-yellow-400 flex items-start gap-2">
+                <p className="mt-4 text-sm text-warning flex items-start gap-2">
                   <AlertCircle size={17} className="shrink-0 mt-0.5" />
                   {message}
                 </p>
@@ -406,12 +406,12 @@ function VideoScanner() {
         </div>
 
         {/* Right Information Panel */}
-        <div className="lg:col-span-4 space-y-5">
+        <div className="min-w-0 xl:col-span-4 space-y-5">
 
           <section className="bg-surface-container-low border border-outline-variant/20 rounded-2xl p-5">
 
             <div className="flex items-center gap-3 mb-4">
-              <ShieldCheck className="text-primary" size={23} />
+              <ShieldCheck className="text-primary-strong" size={23} />
 
               <h2 className="font-semibold">
                 How Video Verification Works
@@ -427,7 +427,7 @@ function VideoScanner() {
 
               <div className="flex gap-3">
 
-                <div className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-primary/10 text-primary-strong flex items-center justify-center shrink-0">
                   <Film size={17} />
                 </div>
 
@@ -521,7 +521,7 @@ function VideoScanner() {
       {/* Important Notice */}
       <section className="p-5 rounded-xl bg-surface-container-low border border-outline-variant/20 flex items-start gap-4">
 
-        <ShieldCheck size={24} className="text-primary shrink-0" />
+        <ShieldCheck size={24} className="text-primary-strong shrink-0" />
 
         <div>
           <h3 className="font-semibold mb-1">
@@ -538,11 +538,11 @@ function VideoScanner() {
       </section>
 
       {/* Backend Status */}
-      <div className="flex items-center gap-3 p-4 rounded-lg bg-yellow-500/5 border border-yellow-500/20">
+      <div className="flex items-center gap-3 p-4 rounded-lg bg-warning/5 border border-warning/20">
 
-        <AlertCircle size={18} className="text-yellow-400 shrink-0" />
+        <AlertCircle size={18} className="text-warning shrink-0" />
 
-        <p className="text-xs text-yellow-400">
+        <p className="text-xs text-warning">
           VIDEO ANALYSIS ENGINE: BACKEND INTEGRATION PENDING
         </p>
 

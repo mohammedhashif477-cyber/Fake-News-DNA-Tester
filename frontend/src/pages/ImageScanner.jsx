@@ -140,7 +140,7 @@ function ImageScanner() {
       {/* Heading */}
       <section className="space-y-2">
 
-        <div className="flex items-center gap-2 text-primary font-code text-xs tracking-wider">
+        <div className="flex items-center gap-2 text-primary-strong font-code text-xs tracking-wider">
           <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
           FORENSIC VISION ENGINE
         </div>
@@ -166,10 +166,10 @@ function ImageScanner() {
       </section>
 
       {/* Main Workspace */}
-      <section className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+      <section className="grid min-w-0 grid-cols-1 xl:grid-cols-12 gap-5 items-start">
 
         {/* Upload Area */}
-        <div className="lg:col-span-8 space-y-5">
+        <div className="min-w-0 xl:col-span-8 space-y-5">
 
           <div className="gluco-card p-5 md:p-6 space-y-5">
 
@@ -191,7 +191,7 @@ function ImageScanner() {
                 }`}
               >
 
-                <div className="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center text-primary mb-5">
+                <div className="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center text-primary-strong mb-5">
                   <ImageIcon size={30} />
                 </div>
 
@@ -229,7 +229,7 @@ function ImageScanner() {
                 <div className="flex items-center justify-between">
 
                   <div>
-                    <p className="text-xs font-code text-primary tracking-wider">
+                    <p className="text-xs font-code text-primary-strong tracking-wider">
                       IMAGE PREVIEW
                     </p>
 
@@ -255,7 +255,7 @@ function ImageScanner() {
                   /\.(heic|heif)$/i.test(image?.name || '') ? (
 
                     <div className="p-8 text-center">
-                      <FileImage size={40} className="mx-auto text-primary mb-3" />
+                      <FileImage size={40} className="mx-auto text-primary-strong mb-3" />
 
                       <p className="font-semibold">
                         HEIC image selected
@@ -284,7 +284,7 @@ function ImageScanner() {
 
                   <div className="flex items-center gap-3 min-w-0">
 
-                    <div className="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                    <div className="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center text-primary-strong shrink-0">
                       <FileImage size={22} />
                     </div>
 
@@ -312,7 +312,7 @@ function ImageScanner() {
                 {/* Replace */}
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="flex items-center gap-2 text-sm text-primary hover:text-on-surface transition"
+                  className="flex items-center gap-2 text-sm text-primary-strong hover:text-on-surface transition"
                 >
                   <RefreshCw size={16} />
                   Replace Image
@@ -357,7 +357,7 @@ function ImageScanner() {
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-3 border-t border-outline-variant/30">
 
               <p className="text-xs text-on-surface-variant flex items-center gap-2">
-                <ShieldCheck size={17} className="text-primary shrink-0" />
+                <ShieldCheck size={17} className="text-primary-strong shrink-0" />
                 OCR and authenticity analysis are not yet connected.
               </p>
 
@@ -393,7 +393,7 @@ function ImageScanner() {
 
           <button
             onClick={() => cameraInputRef.current?.click()}
-            className="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition"
+            className="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary-strong transition"
           >
             <Camera size={18} />
             Capture image using camera
@@ -402,14 +402,14 @@ function ImageScanner() {
         </div>
 
         {/* Right Information Panel */}
-        <div className="lg:col-span-4 space-y-5">
+        <div className="min-w-0 xl:col-span-4 space-y-5">
 
           {/* Investigation Process */}
           <div className="gluco-card p-5 space-y-5">
 
             <div className="flex items-center gap-3">
 
-              <div className="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+              <div className="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary-strong">
                 <ShieldCheck size={21} />
               </div>
 
@@ -443,7 +443,7 @@ function ImageScanner() {
 
               <div className="flex items-start gap-3">
 
-                <Search size={19} className="text-primary shrink-0 mt-0.5" />
+                <Search size={19} className="text-primary-strong shrink-0 mt-0.5" />
 
                 <div>
                   <p className="text-sm font-semibold">
@@ -477,7 +477,7 @@ function ImageScanner() {
 
             <div className="bg-surface-container rounded-lg p-3 flex items-start gap-2">
 
-              <Lock size={16} className="text-primary shrink-0 mt-0.5" />
+              <Lock size={16} className="text-primary-strong shrink-0 mt-0.5" />
 
               <p className="text-xs text-on-surface-variant leading-5">
                 Image processing and privacy controls will be implemented with the backend.
@@ -491,7 +491,7 @@ function ImageScanner() {
           <div className="gluco-card p-5 space-y-4">
 
             <div className="flex items-center gap-2">
-              <Search size={18} className="text-primary" />
+              <Search size={18} className="text-primary-strong" />
 
               <h3 className="font-semibold text-sm">
                 Investigation Checklist
@@ -531,7 +531,7 @@ function ImageScanner() {
       {/* Bottom Information */}
       <section className="gluco-card p-5 flex flex-col sm:flex-row gap-4 items-start">
 
-        <div className="w-11 h-11 rounded-full bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+        <div className="w-11 h-11 rounded-full bg-surface-container-high flex items-center justify-center text-primary-strong shrink-0">
           <ShieldCheck size={22} />
         </div>
 
@@ -552,11 +552,11 @@ function ImageScanner() {
       </section>
 
       {/* Backend Status */}
-      <div className="flex items-center gap-3 bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
+      <div className="flex items-center gap-3 bg-warning/5 border border-warning/20 rounded-lg p-4">
 
-        <AlertCircle size={19} className="text-yellow-400 shrink-0" />
+        <AlertCircle size={19} className="text-warning shrink-0" />
 
-        <p className="text-xs text-yellow-400">
+        <p className="text-xs text-warning">
           IMAGE ANALYSIS ENGINE: BACKEND INTEGRATION PENDING
         </p>
 

@@ -80,17 +80,17 @@ function DNAReport() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto space-y-7">
+    <div className="w-full min-w-0 space-y-7">
 
       {/* Report Header */}
       <section className="space-y-4">
 
         <div className="flex flex-wrap items-center justify-between gap-3">
 
-          <div className="flex items-center gap-2 text-xs text-gray-400">
-            <ShieldCheck size={16} className="text-cyan-400" />
+          <div className="flex items-center gap-2 text-xs text-on-surface-variant">
+            <ShieldCheck size={16} className="text-primary-strong" />
 
-            <span className="text-cyan-400 font-mono">
+            <span className="text-primary-strong font-mono">
               GLUCO INVESTIGATION ENGINE
             </span>
 
@@ -98,8 +98,8 @@ function DNAReport() {
             <span>DNA Reports</span>
           </div>
 
-          <div className="flex items-center gap-2 text-xs text-yellow-400">
-            <span className="w-2 h-2 rounded-full bg-yellow-400" />
+          <div className="flex items-center gap-2 text-xs text-warning">
+            <span className="w-2 h-2 rounded-full bg-warning" />
             REPORT ENGINE UNDER DEVELOPMENT
           </div>
 
@@ -108,8 +108,8 @@ function DNAReport() {
         <div>
           <div className="flex items-center gap-3 mb-3">
 
-            <div className="p-3 rounded-xl bg-cyan-500/10">
-              <Dna className="text-cyan-400" size={28} />
+            <div className="p-3 rounded-xl bg-primary/10">
+              <Dna className="text-primary-strong" size={28} />
             </div>
 
             <div>
@@ -117,14 +117,14 @@ function DNAReport() {
                 Misinformation DNA Report
               </h1>
 
-              <p className="text-xs text-gray-500 mt-1 font-mono">
+              <p className="text-xs text-outline mt-1 font-mono">
                 EVIDENCE-BASED INVESTIGATION RECORD
               </p>
             </div>
 
           </div>
 
-          <p className="text-sm text-gray-400 max-w-3xl leading-6">
+          <p className="text-sm text-on-surface-variant max-w-3xl leading-6">
             A structured investigation record combining factual claim
             verification, source intelligence, media forensics,
             contextual analysis and supporting evidence.
@@ -134,7 +134,7 @@ function DNAReport() {
       </section>
 
       {/* Report Status */}
-      <section className="bg-[#111827] border border-gray-800 rounded-xl p-6">
+      <section className="bg-surface-container-low border border-outline-variant rounded-xl p-6">
 
         <div className="flex flex-col lg:flex-row justify-between gap-6">
 
@@ -142,12 +142,12 @@ function DNAReport() {
 
             <div className="flex flex-wrap items-center gap-2">
 
-              <span className="flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 text-xs">
+              <span className="flex items-center gap-2 px-3 py-1 rounded-full bg-warning/10 border border-warning/20 text-warning text-xs">
                 <Clock size={14} />
                 No Report Available
               </span>
 
-              <span className="px-3 py-1 rounded-full bg-gray-800 text-gray-400 text-xs">
+              <span className="px-3 py-1 rounded-full bg-surface-container-high text-on-surface-variant text-xs">
                 Waiting for Investigation
               </span>
 
@@ -157,7 +157,7 @@ function DNAReport() {
               No Investigation Selected
             </h2>
 
-            <p className="text-sm text-gray-400 max-w-2xl leading-6">
+            <p className="text-sm text-on-surface-variant max-w-2xl leading-6">
               Complete a text, image or video investigation to
               generate a detailed Misinformation DNA Report.
               Findings and evidence will appear here once
@@ -168,8 +168,8 @@ function DNAReport() {
 
           <div className="flex items-center justify-center min-w-32">
 
-            <div className="w-20 h-20 rounded-2xl bg-cyan-500/10 flex items-center justify-center">
-              <Dna size={42} className="text-cyan-400" />
+            <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center">
+              <Dna size={42} className="text-primary-strong" />
             </div>
 
           </div>
@@ -179,17 +179,17 @@ function DNAReport() {
       </section>
 
       {/* Main Report Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+      <div className="grid min-w-0 grid-cols-1 xl:grid-cols-12 gap-5">
 
         {/* Main Investigation Area */}
-        <div className="lg:col-span-8 space-y-5">
+        <div className="min-w-0 xl:col-span-8 space-y-5">
 
           {/* Executive Summary */}
-          <section className="bg-[#111827] border border-gray-800 rounded-xl p-6">
+          <section className="bg-surface-container-low border border-outline-variant rounded-xl p-6">
 
             <div className="flex items-center gap-3 mb-5">
 
-              <FileText size={21} className="text-cyan-400" />
+              <FileText size={21} className="text-primary-strong" />
 
               <h2 className="font-semibold">
                 Executive Investigation Summary
@@ -197,11 +197,11 @@ function DNAReport() {
 
             </div>
 
-            <div className="bg-[#080b14] border border-dashed border-gray-700 rounded-lg p-6 text-center">
+            <div className="bg-surface-container-lowest border border-dashed border-outline-variant/70 rounded-lg p-6 text-center">
 
-              <Info size={25} className="text-gray-500 mx-auto mb-3" />
+              <Info size={25} className="text-outline mx-auto mb-3" />
 
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-on-surface-variant">
                 The investigation summary will appear here
                 after a completed analysis.
               </p>
@@ -211,27 +211,27 @@ function DNAReport() {
           </section>
 
           {/* Claim-Level Breakdown */}
-          <section className="bg-[#111827] border border-gray-800 rounded-xl p-6">
+          <section className="bg-surface-container-low border border-outline-variant rounded-xl p-6">
 
             <div className="flex items-center justify-between mb-5">
 
               <div className="flex items-center gap-3">
-                <Search size={21} className="text-cyan-400" />
+                <Search size={21} className="text-primary-strong" />
 
                 <h2 className="font-semibold">
                   Specific Claims Tested
                 </h2>
               </div>
 
-              <span className="text-xs text-gray-500 font-mono">
+              <span className="text-xs text-outline font-mono">
                 0 CLAIMS
               </span>
 
             </div>
 
-            <div className="bg-[#080b14] border border-dashed border-gray-700 rounded-lg p-5 text-center">
+            <div className="bg-surface-container-lowest border border-dashed border-outline-variant/70 rounded-lg p-5 text-center">
 
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-outline">
                 Individual factual claims and their evidence-based
                 findings will be displayed here.
               </p>
@@ -241,19 +241,19 @@ function DNAReport() {
           </section>
 
           {/* Six Diagnostic Dimensions */}
-          <section className="bg-[#111827] border border-gray-800 rounded-xl p-6">
+          <section className="bg-surface-container-low border border-outline-variant rounded-xl p-6">
 
             <div className="flex flex-wrap justify-between items-center gap-3 mb-5">
 
               <div className="flex items-center gap-3">
-                <Microscope size={22} className="text-cyan-400" />
+                <Microscope size={22} className="text-primary-strong" />
 
                 <h2 className="font-semibold">
                   Six Forensic Diagnostic Dimensions
                 </h2>
               </div>
 
-              <span className="text-xs text-gray-500">
+              <span className="text-xs text-outline">
                 Click to expand
               </span>
 
@@ -268,28 +268,28 @@ function DNAReport() {
                 return (
                   <div
                     key={module.title}
-                    className="bg-[#080b14] border border-gray-800 rounded-lg overflow-hidden"
+                    className="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden"
                   >
 
                     <button
                       onClick={() => toggleModule(index)}
-                      className="w-full flex items-center justify-between gap-3 p-4 text-left hover:bg-gray-800/50 transition"
+                      className="w-full flex items-center justify-between gap-3 p-4 text-left hover:bg-surface-container-high transition"
                     >
 
                       <div className="flex items-center gap-3 min-w-0">
 
                         <Icon
                           size={19}
-                          className="text-cyan-400 shrink-0"
+                          className="text-primary-strong shrink-0"
                         />
 
                         <div className="min-w-0">
 
-                          <p className="text-sm text-gray-200 font-medium">
+                          <p className="text-sm text-on-surface font-medium">
                             {module.title}
                           </p>
 
-                          <p className="text-xs text-gray-500 mt-1">
+                          <p className="text-xs text-outline mt-1">
                             Diagnostic Module 0{index + 1}
                           </p>
 
@@ -299,7 +299,7 @@ function DNAReport() {
 
                       <ChevronDown
                         size={18}
-                        className={`text-gray-500 shrink-0 transition-transform ${
+                        className={`text-outline shrink-0 transition-transform ${
                           isExpanded ? 'rotate-180' : ''
                         }`}
                       />
@@ -307,13 +307,13 @@ function DNAReport() {
                     </button>
 
                     {isExpanded && (
-                      <div className="px-4 pb-4 pt-1 border-t border-gray-800">
+                      <div className="px-4 pb-4 pt-1 border-t border-outline-variant">
 
-                        <p className="text-sm text-gray-400 leading-6">
+                        <p className="text-sm text-on-surface-variant leading-6">
                           {module.description}
                         </p>
 
-                        <p className="text-xs text-yellow-400 mt-3">
+                        <p className="text-xs text-warning mt-3">
                           Analysis results will appear after backend integration.
                         </p>
 
@@ -329,11 +329,11 @@ function DNAReport() {
           </section>
 
           {/* Source Provenance */}
-          <section className="bg-[#111827] border border-gray-800 rounded-xl p-6">
+          <section className="bg-surface-container-low border border-outline-variant rounded-xl p-6">
 
             <div className="flex items-center gap-3 mb-5">
 
-              <History size={22} className="text-cyan-400" />
+              <History size={22} className="text-primary-strong" />
 
               <h2 className="font-semibold">
                 Source Provenance & Mutation History
@@ -341,16 +341,16 @@ function DNAReport() {
 
             </div>
 
-            <div className="bg-[#080b14] border border-dashed border-gray-700 rounded-lg p-6 text-center">
+            <div className="bg-surface-container-lowest border border-dashed border-outline-variant/70 rounded-lg p-6 text-center">
 
-              <Globe size={25} className="text-gray-500 mx-auto mb-3" />
+              <Globe size={25} className="text-outline mx-auto mb-3" />
 
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-on-surface-variant">
                 Publicly discoverable source references and
                 available content history will appear here.
               </p>
 
-              <p className="text-xs text-gray-500 mt-2">
+              <p className="text-xs text-outline mt-2">
                 The earliest source found will not necessarily
                 be the original source.
               </p>
@@ -362,14 +362,14 @@ function DNAReport() {
         </div>
 
         {/* Evidence Sidebar */}
-        <aside className="lg:col-span-4 space-y-5">
+        <aside className="min-w-0 xl:col-span-4 space-y-5">
 
           {/* Claim Outcomes */}
-          <section className="bg-[#111827] border border-gray-800 rounded-xl p-5">
+          <section className="bg-surface-container-low border border-outline-variant rounded-xl p-5">
 
             <div className="flex items-center gap-3 mb-4">
 
-              <Scale size={20} className="text-cyan-400" />
+              <Scale size={20} className="text-primary-strong" />
 
               <h3 className="font-semibold">
                 Claim Investigation Outcomes
@@ -383,7 +383,7 @@ function DNAReport() {
 
                 <div
                   key={outcome}
-                  className="px-3 py-2 rounded-lg bg-[#080b14] border border-gray-800 text-xs text-gray-400"
+                  className="px-3 py-2 rounded-lg bg-surface-container-lowest border border-outline-variant text-xs text-on-surface-variant"
                 >
                   {outcome}
                 </div>
@@ -392,7 +392,7 @@ function DNAReport() {
 
             </div>
 
-            <p className="text-xs text-gray-500 leading-5 mt-4">
+            <p className="text-xs text-outline leading-5 mt-4">
               Findings are assigned to individual claims.
               Unverified does not automatically mean false.
             </p>
@@ -400,11 +400,11 @@ function DNAReport() {
           </section>
 
           {/* Primary Evidence */}
-          <section className="bg-[#111827] border border-gray-800 rounded-xl p-5">
+          <section className="bg-surface-container-low border border-outline-variant rounded-xl p-5">
 
             <div className="flex items-center gap-3 mb-4">
 
-              <BookOpen size={20} className="text-cyan-400" />
+              <BookOpen size={20} className="text-primary-strong" />
 
               <h3 className="font-semibold">
                 Primary Evidence Sources
@@ -412,11 +412,11 @@ function DNAReport() {
 
             </div>
 
-            <div className="bg-[#080b14] border border-dashed border-gray-700 rounded-lg p-5 text-center">
+            <div className="bg-surface-container-lowest border border-dashed border-outline-variant/70 rounded-lg p-5 text-center">
 
-              <FileText size={24} className="text-gray-500 mx-auto mb-3" />
+              <FileText size={24} className="text-outline mx-auto mb-3" />
 
-              <p className="text-xs text-gray-400">
+              <p className="text-xs text-on-surface-variant">
                 Supporting sources and reference links
                 will be listed here.
               </p>
@@ -426,11 +426,11 @@ function DNAReport() {
           </section>
 
           {/* Forward vs Reality */}
-          <section className="bg-[#111827] border border-gray-800 rounded-xl p-5">
+          <section className="bg-surface-container-low border border-outline-variant rounded-xl p-5">
 
             <div className="flex items-center gap-3 mb-4">
 
-              <Activity size={20} className="text-purple-400" />
+              <Activity size={20} className="text-secondary" />
 
               <h3 className="font-semibold">
                 Claim vs Evidence
@@ -438,29 +438,29 @@ function DNAReport() {
 
             </div>
 
-            <p className="text-sm text-gray-400 leading-6">
+            <p className="text-sm text-on-surface-variant leading-6">
               GLUCO will compare submitted claims against
               available evidence and relevant context.
             </p>
 
             <div className="mt-4 space-y-3">
 
-              <div className="bg-[#080b14] rounded-lg p-3">
-                <p className="text-xs text-red-400 font-medium mb-1">
+              <div className="bg-surface-container-lowest rounded-lg p-3">
+                <p className="text-xs text-error font-medium mb-1">
                   SUBMITTED CLAIM
                 </p>
 
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-outline">
                   Original claim will appear here.
                 </p>
               </div>
 
-              <div className="bg-[#080b14] rounded-lg p-3">
-                <p className="text-xs text-green-400 font-medium mb-1">
+              <div className="bg-surface-container-lowest rounded-lg p-3">
+                <p className="text-xs text-tertiary font-medium mb-1">
                   AVAILABLE EVIDENCE
                 </p>
 
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-outline">
                   Supporting or conflicting evidence will appear here.
                 </p>
               </div>
@@ -470,11 +470,11 @@ function DNAReport() {
           </section>
 
           {/* Limitations */}
-          <section className="bg-[#111827] border border-gray-800 rounded-xl p-5">
+          <section className="bg-surface-container-low border border-outline-variant rounded-xl p-5">
 
             <div className="flex items-center gap-3 mb-4">
 
-              <Lock size={19} className="text-cyan-400" />
+              <Lock size={19} className="text-primary-strong" />
 
               <h3 className="font-semibold">
                 Limitations & Scope
@@ -482,7 +482,7 @@ function DNAReport() {
 
             </div>
 
-            <div className="space-y-3 text-xs text-gray-400 leading-5">
+            <div className="space-y-3 text-xs text-on-surface-variant leading-5">
 
               <p>
                 • Findings depend on the quality and availability
@@ -512,14 +512,14 @@ function DNAReport() {
       </div>
 
       {/* Backend Status */}
-      <div className="flex items-center gap-3 bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
+      <div className="flex items-center gap-3 bg-warning/5 border border-warning/20 rounded-lg p-4">
 
         <AlertTriangle
-          className="text-yellow-400 shrink-0"
+          className="text-warning shrink-0"
           size={19}
         />
 
-        <p className="text-xs text-yellow-400">
+        <p className="text-xs text-warning">
           DNA REPORT GENERATION ENGINE: BACKEND INTEGRATION PENDING
         </p>
 

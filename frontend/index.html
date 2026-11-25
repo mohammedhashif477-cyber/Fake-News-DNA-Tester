@@ -16,6 +16,14 @@
     <meta name="theme-color" content="#051424" />
 
     <title>GLUCO | Fake News Detection</title>
+
+    <script>
+      const savedTheme = localStorage.getItem('gluco-theme')
+      const theme = savedTheme === 'light' ? 'light' : 'dark'
+      document.documentElement.dataset.theme = theme
+      document.querySelector('meta[name="theme-color"]').content =
+        theme === 'light' ? '#F5F8FC' : '#051424'
+    </script>
   </head>
 
   <body>

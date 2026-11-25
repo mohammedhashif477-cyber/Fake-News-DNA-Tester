@@ -7,56 +7,105 @@
 ======================================== */
 
 @theme {
-  --color-surface: #051424;
-  --color-surface-container-lowest: #010f1f;
-  --color-surface-container-low: #0d1c2d;
-  --color-surface-container: #122131;
-  --color-surface-container-high: #1c2b3c;
-  --color-surface-container-highest: #273647;
+  --color-surface: var(--gluco-surface);
+  --color-sidebar: var(--gluco-sidebar);
+  --color-card: var(--gluco-card);
+  --color-surface-container-lowest: var(--gluco-surface-container-lowest);
+  --color-surface-container-low: var(--gluco-surface-container-low);
+  --color-surface-container: var(--gluco-surface-container);
+  --color-surface-container-high: var(--gluco-surface-container-high);
+  --color-surface-container-highest: var(--gluco-surface-container-highest);
 
-  --color-primary: #4cd7f6;
-  --color-primary-container: #06b6d4;
+  --color-primary: var(--gluco-primary);
+  --color-primary-strong: var(--gluco-primary-strong);
+  --color-primary-container: var(--gluco-primary-container);
+  --color-on-primary: var(--gluco-on-primary);
 
-  --color-secondary: #d0bcff;
-  --color-secondary-container: #571bc1;
+  --color-secondary: var(--gluco-secondary);
+  --color-secondary-container: var(--gluco-secondary-container);
+  --color-tertiary: var(--gluco-tertiary);
 
-  --color-tertiary: #4edea3;
+  --color-on-surface: var(--gluco-on-surface);
+  --color-on-surface-variant: var(--gluco-on-surface-variant);
 
-  --color-on-surface: #d4e4fa;
-  --color-on-surface-variant: #bcc9cd;
+  --color-outline: var(--gluco-outline);
+  --color-outline-variant: var(--gluco-outline-variant);
 
-  --color-outline: #869397;
-  --color-outline-variant: #3d494c;
-
-  --color-error: #ffb4ab;
+  --color-error: var(--gluco-error);
+  --color-warning: var(--gluco-warning);
 
   --font-body: "Inter", sans-serif;
   --font-headline: "Plus Jakarta Sans", sans-serif;
   --font-code: "JetBrains Mono", monospace;
 }
 
-/* ========================================
-   GLOBAL RESET
-======================================== */
+:root {
+  color-scheme: dark;
+  --gluco-surface: #051424;
+  --gluco-sidebar: #03111f;
+  --gluco-card: #102235;
+  --gluco-surface-container-lowest: #010f1f;
+  --gluco-surface-container-low: #102235;
+  --gluco-surface-container: #122131;
+  --gluco-surface-container-high: #1c2b3c;
+  --gluco-surface-container-highest: #273647;
+  --gluco-primary: #06b6d4;
+  --gluco-primary-strong: #06b6d4;
+  --gluco-primary-container: #06b6d4;
+  --gluco-on-primary: #003640;
+  --gluco-secondary: #d0bcff;
+  --gluco-secondary-container: #571bc1;
+  --gluco-tertiary: #4edea3;
+  --gluco-on-surface: #e2e8f0;
+  --gluco-on-surface-variant: #94a3b8;
+  --gluco-outline: #869397;
+  --gluco-outline-variant: #3d494c;
+  --gluco-error: #ffb4ab;
+  --gluco-warning: #fbbf24;
+}
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+:root[data-theme='light'] {
+  color-scheme: light;
+  --gluco-surface: #f5f8fc;
+  --gluco-sidebar: #ffffff;
+  --gluco-card: #ffffff;
+  --gluco-surface-container-lowest: #edf2f7;
+  --gluco-surface-container-low: #ffffff;
+  --gluco-surface-container: #f0f4f8;
+  --gluco-surface-container-high: #e8eef5;
+  --gluco-surface-container-highest: #dce5ef;
+  --gluco-primary: #0891b2;
+  --gluco-primary-strong: #0e7490;
+  --gluco-primary-container: #0891b2;
+  --gluco-on-primary: #031f2c;
+  --gluco-secondary: #7c3aed;
+  --gluco-secondary-container: #6d28d9;
+  --gluco-tertiary: #15803d;
+  --gluco-on-surface: #172b42;
+  --gluco-on-surface-variant: #64748b;
+  --gluco-outline: #64748b;
+  --gluco-outline-variant: #e2e8f0;
+  --gluco-error: #b91c1c;
+  --gluco-warning: #a16207;
 }
 
 html {
   scroll-behavior: smooth;
-  background: #051424;
+  background: var(--color-surface);
 }
 
 body {
-  min-width: 320px;
   min-height: 100vh;
   font-family: "Inter", sans-serif;
-  background-color: #051424;
-  color: #d4e4fa;
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
   -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: clip;
 }
 
 /* ========================================
@@ -88,16 +137,16 @@ pre,
 }
 
 ::-webkit-scrollbar-track {
-  background: #010f1f;
+  background: var(--color-surface-container-lowest);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #273647;
+  background: var(--color-surface-container-highest);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #4cd7f6;
+  background: var(--color-primary);
 }
 
 /* ========================================
@@ -105,31 +154,45 @@ pre,
 ======================================== */
 
 ::selection {
-  background: #06b6d4;
-  color: #003640;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
 }
 
 /* ========================================
    FORM ELEMENTS
 ======================================== */
 
-button,
-input,
-textarea,
-select {
-  font: inherit;
+@layer base {
+  button {
+    cursor: pointer;
+  }
+
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  :where(#root *) {
+    transition-property: background-color, border-color, color, box-shadow;
+    transition-duration: 180ms;
+    transition-timing-function: ease;
+  }
 }
 
-button {
-  cursor: pointer;
-}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 
-button:focus-visible,
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible {
-  outline: 2px solid #4cd7f6;
-  outline-offset: 2px;
+  #root *,
+  #root *::before,
+  #root *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }
 
 /* ========================================
@@ -137,42 +200,26 @@ select:focus-visible {
 ======================================== */
 
 .gluco-card {
-  background: #0d1c2d;
-  border: 1px solid #273647;
+  background: var(--color-card);
+  border: 1px solid var(--color-outline-variant);
   border-radius: 12px;
 }
 
 .gluco-gradient {
   background: linear-gradient(
     135deg,
-    #06b6d4 0%,
-    #4cd7f6 100%
+    var(--color-primary-container) 0%,
+    var(--color-primary) 100%
   );
 }
 
 .gluco-text-gradient {
   background: linear-gradient(
     135deg,
-    #4cd7f6,
-    #d0bcff
+    var(--color-primary),
+    var(--color-secondary)
   );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-}
-
-/* GLUCO Main Layout Fix */
-.app-main {
-  min-height: 100vh;
-}
-
-@media (min-width: 768px) {
-  .app-main {
-    padding-left: 256px;
-  }
-}
-
-/* GLUCO Page Header Spacing */
-.app-main main {
-  padding-top: 110px !important;
 }

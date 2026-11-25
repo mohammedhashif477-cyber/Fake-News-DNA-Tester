@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import './App.css'
 
 import {
   LayoutDashboard,
@@ -13,6 +14,8 @@ import {
   UserRound,
   Activity,
   Menu,
+  Moon,
+  Sun,
   X,
 } from 'lucide-react'
 
@@ -21,8 +24,12 @@ import TextScanner from './pages/TextScanner'
 import ImageScanner from './pages/ImageScanner'
 import VideoScanner from './pages/VideoScanner'
 import DNAReport from './pages/DNAReport'
+import LanguageDropdown from './components/LanguageDropdown'
 
 function App() {
+  const [theme, setTheme] = useState(() =>
+    document.documentElement.dataset.theme === 'light' ? 'light' : 'dark'
+  )
   const [activePage, setActivePage] = useState('Dashboard')
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [selectedLanguage, setSelectedLanguage] = useState('en')
@@ -48,6 +55,19 @@ function App() {
     setMobileMenuOpen(false)
   }
 
+  const toggleTheme = () => {
+    const nextTheme = theme === 'dark' ? 'light' : 'dark'
+    document.documentElement.dataset.theme = nextTheme
+    localStorage.setItem('gluco-theme', nextTheme)
+
+    const themeColor = document.querySelector('meta[name="theme-color"]')
+    if (themeColor) {
+      themeColor.content = nextTheme === 'light' ? '#F5F8FC' : '#051424'
+    }
+
+    setTheme(nextTheme)
+  }
+
   const renderPage = () => {
     switch (activePage) {
       case 'Dashboard':
@@ -71,12 +91,13 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-surface text-on-surface font-body">
+    <div data-theme={theme} className="min-h-screen bg-surface text-on-surface font-body">
 
       {/* Mobile Menu Button */}
       <button
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-      className="md:hidden fixed top-4 left-4 z-[70] p-2 rounded-lg bg-surface-container text-primary"        aria-label="Toggle navigation"
+      className="lg:hidden fixed top-4 left-4 z-[70] p-2 rounded-lg bg-surface-container text-primary-strong"
+        aria-label="Toggle navigation"
       >
         {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
       </button>
@@ -84,14 +105,16 @@ function App() {
       {/* Mobile Sidebar Overlay */}
       {mobileMenuOpen && (
         <div
-      className="md:hidden fixed inset-0 bg-black/60 z-40"          onClick={() => setMobileMenuOpen(false)}
+      className="lg:hidden fixed inset-0 bg-black/60 z-40"
+          onClick={() => setMobileMenuOpen(false)}
         />
       )}
 
       {/* Sidebar */}
       <aside
-        className={`fixed left-0 top-0 z-50 h-screen w-64 bg-surface-container-lowest flex flex-col justify-between py-6 border-r border-outline-variant/30 transition-transform duration-300 ${
-      mobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'        }`}
+        className={`fixed left-0 top-0 z-50 h-screen w-64 bg-sidebar flex flex-col justify-between py-6 border-r border-outline-variant/30 transition-transform duration-300 ${
+          mobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+        }`}
       >
 
         <div className="flex flex-col gap-8">
@@ -99,7 +122,7 @@ function App() {
           {/* GLUCO Brand */}
           <div className="px-5 flex items-center gap-3">
 
-            <div className="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-primary">
+            <div className="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-primary-strong">
               <ShieldCheck size={22} />
             </div>
 
@@ -134,7 +157,7 @@ function App() {
                     onClick={() => navigateTo(item.name)}
                     className={`w-full flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition-colors ${
                       isActive
-                        ? 'bg-surface-container text-primary font-semibold'
+                        ? 'bg-surface-container text-primary-strong font-semibold'
                         : 'text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface'
                     }`}
                   >
@@ -201,13 +224,13 @@ function App() {
       {/* Main Application Area */}
       <div className="app-main">
           {/* Top Header */}
-      <header className="fixed top-0 left-0 md:left-64 right-0 h-16 z-30 bg-surface/90 backdrop-blur-xl border-b border-outline-variant/20">
-          <div className="h-full px-5 lg:px-8 flex items-center justify-between gap-4">
+      <header className="fixed top-0 left-0 lg:left-64 right-0 h-16 z-30 bg-surface/90 backdrop-blur-xl border-b border-outline-variant/20">
+          <div className="h-full pl-14 pr-4 sm:pl-16 sm:pr-5 lg:px-8 flex items-center justify-between gap-4">
 
             {/* Search */}
-            <div className="hidden sm:flex flex-1 max-w-xl">
+            <div className="hidden sm:flex min-w-0 flex-1 max-w-xl">
 
-              <div className="w-full h-10 px-3 rounded-lg bg-surface-container-low flex items-center gap-3 text-on-surface-variant">
+              <div className="w-full min-w-0 h-10 px-3 rounded-lg bg-surface-container-low flex items-center gap-3 text-on-surface-variant">
 
                 <Search size={17} />
 
@@ -222,37 +245,39 @@ function App() {
             </div>
 
             {/* Header Actions */}
-            <div className="flex items-center gap-3 ml-auto">
+            <div className="flex shrink-0 items-center gap-2 sm:gap-3 max-[359px]:gap-1 ml-auto">
 
               {/* Language Selector */}
-              <div className="h-9 px-2 sm:px-3 rounded-lg bg-surface-container-low flex items-center gap-2">
+              <LanguageDropdown
+                value={selectedLanguage}
+                onChange={setSelectedLanguage}
+                options={languages}
+                label="Select global language"
+                compact
+              />
 
-                <Languages size={16} className="text-on-surface-variant" />
-
-                <select
-                  value={selectedLanguage}
-                  onChange={(event) => setSelectedLanguage(event.target.value)}
-                  className="bg-transparent text-xs text-on-surface outline-none cursor-pointer max-w-24"
-                  aria-label="Select language"
+              {/* Theme Toggle */}
+              <button
+                type="button"
+                onClick={toggleTheme}
+                aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                className="group relative flex h-9 w-9 items-center justify-center rounded-lg border border-outline-variant/40 bg-surface-container-low text-on-surface-variant transition-colors hover:border-primary/40 hover:bg-surface-container hover:text-primary-strong active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+              >
+                {theme === 'dark' ? <Moon size={18} /> : <Sun size={18} />}
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute right-0 top-full z-[80] mt-2 w-max rounded-md border border-outline-variant bg-card px-2.5 py-1.5 text-xs text-on-surface opacity-0 shadow-lg transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
                 >
-                  {languages.map((language) => (
-                    <option
-                      key={language.code}
-                      value={language.code}
-                      className="bg-surface-container-lowest"
-                    >
-                      {language.name}
-                    </option>
-                  ))}
-                </select>
-
-              </div>
+                  {theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                </span>
+              </button>
 
               {/* Help */}
               <button
                 type="button"
                 title="Help and documentation"
-                className="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"
+                className="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:text-primary-strong transition-colors"
               >
                 <HelpCircle size={18} />
               </button>
@@ -269,13 +294,13 @@ function App() {
         </header>
 
         {/* Page Content */}
-        <main className="min-h-screen pt-24 pb-8 px-5 md:px-8 bg-surface">
-          <div className="max-w-7xl mx-auto">
+        <main className="min-h-screen min-w-0 pt-24 pb-8 px-5 md:px-8 bg-surface">
+          <div className="w-full max-w-7xl mx-auto">
 
             {/* Page Heading */}
-            <div className="mb-8 flex items-center gap-2">
+            <div className="mb-8 flex flex-wrap items-center gap-2">
 
-              <Activity size={15} className="text-primary" />
+              <Activity size={15} className="text-primary-strong" />
 
               <span className="text-[10px] font-semibold tracking-[0.18em] text-on-surface-variant uppercase">
                 GLUCO Investigation Center
@@ -283,7 +308,7 @@ function App() {
 
               <span className="text-outline">/</span>
 
-              <span className="text-xs text-primary">
+              <span className="text-xs text-primary-strong">
                 {activePage}
               </span>
 

@@ -6,7 +6,6 @@ import {
   MessageSquare,
   Image as ImageIcon,
   Film,
-  CheckCircle2,
   Languages,
   Activity,
   FileSearch,
@@ -14,7 +13,6 @@ import {
 
 function Dashboard({ onNavigate }) {
   const [claim, setClaim] = useState('')
-  const [selectedLanguage, setSelectedLanguage] = useState('English')
 
   const languages = [
     'English',
@@ -62,12 +60,12 @@ function Dashboard({ onNavigate }) {
   }
 
   return (
-    <div className="w-full space-y-12">
+    <div className="w-full min-w-0 space-y-10 md:space-y-12">
 
       {/* Hero Section */}
       <section className="max-w-5xl pt-5 space-y-5">
 
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-low text-primary">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-low text-primary-strong">
 
           <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
 
@@ -112,13 +110,13 @@ function Dashboard({ onNavigate }) {
       </section>
 
       {/* Quick Verification */}
-      <section className="max-w-5xl">
+      <section className="w-full min-w-0">
 
         <div className="rounded-2xl bg-surface-container-low p-2 focus-within:bg-surface-container transition-colors">
 
           <div className="flex flex-col sm:flex-row items-center gap-3 p-2">
 
-            <Search size={22} className="text-primary shrink-0 hidden sm:block" />
+            <Search size={22} className="text-primary-strong shrink-0 hidden sm:block" />
 
             <input
               type="text"
@@ -147,7 +145,7 @@ function Dashboard({ onNavigate }) {
       </section>
 
       {/* Investigation Modes */}
-      <section className="max-w-5xl">
+      <section className="w-full min-w-0">
 
         <div className="flex flex-wrap justify-between items-end gap-3 mb-5">
 
@@ -167,7 +165,7 @@ function Dashboard({ onNavigate }) {
 
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 items-stretch gap-4">
 
           {scanners.map((scanner) => {
             const Icon = scanner.icon
@@ -175,16 +173,16 @@ function Dashboard({ onNavigate }) {
             return (
               <article
                 key={scanner.title}
-                className="group flex flex-col justify-between p-6 rounded-2xl bg-surface-container-low hover:bg-surface-container border border-outline-variant/20 hover:border-primary/30 transition-all duration-200"
+                className="group flex h-full min-w-0 flex-col justify-between p-6 rounded-2xl bg-surface-container-low hover:bg-surface-container border border-outline-variant/20 hover:border-primary/30 transition-all duration-200"
               >
 
                 <div>
 
-                  <div className="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary transition-colors">
+                  <div className="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-primary-strong group-hover:bg-primary/15 group-hover:text-on-surface group-focus-within:bg-primary/15 group-focus-within:text-on-surface group-active:bg-primary/15 group-active:text-on-surface transition-colors duration-200">
                     <Icon size={25} />
                   </div>
 
-                  <h3 className="text-lg font-semibold mt-6 mb-2 group-hover:text-primary transition-colors">
+                  <h3 className="text-lg font-semibold mt-6 mb-2 group-hover:text-primary-strong transition-colors">
                     {scanner.title}
                   </h3>
 
@@ -198,13 +196,13 @@ function Dashboard({ onNavigate }) {
 
                   <button
                     onClick={() => onNavigate(scanner.page)}
-                    className="flex items-center gap-2 text-sm font-semibold text-primary hover:text-on-surface transition-colors"
+                    className="flex items-center gap-2 text-sm font-semibold text-primary-strong hover:text-on-surface transition-colors"
                   >
                     {scanner.button}
                     <ArrowRight size={16} />
                   </button>
 
-                  <span className="text-[9px] font-code text-outline tracking-wider">
+                  <span className="text-right text-[9px] font-code text-outline tracking-wider">
                     {scanner.engine}
                   </span>
 
@@ -219,13 +217,13 @@ function Dashboard({ onNavigate }) {
       </section>
 
       {/* Investigation System Information */}
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-5xl">
+      <section className="grid w-full min-w-0 grid-cols-1 md:grid-cols-2 items-stretch gap-5">
 
         <div className="p-6 rounded-2xl bg-surface-container-low border border-outline-variant/20">
 
           <div className="flex items-center gap-3 mb-4">
 
-            <div className="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary">
+            <div className="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary-strong">
               <ShieldCheck size={21} />
             </div>
 
@@ -267,7 +265,7 @@ function Dashboard({ onNavigate }) {
       </section>
 
       {/* Recent Investigations */}
-      <section className="max-w-5xl pb-8">
+      <section className="w-full min-w-0 pb-8">
 
         <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
 

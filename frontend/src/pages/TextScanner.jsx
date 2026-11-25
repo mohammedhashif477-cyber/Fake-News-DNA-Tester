@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 
 import {
   Search,
-  Languages,
   ClipboardPaste,
   Delete,
   ShieldCheck,
@@ -12,6 +11,7 @@ import {
   Sparkles,
   Lock,
 } from 'lucide-react'
+import LanguageDropdown from '../components/LanguageDropdown'
 
 function TextScanner() {
   const [text, setText] = useState('')
@@ -110,7 +110,7 @@ function TextScanner() {
       {/* Header */}
       <section className="flex flex-col gap-3">
 
-        <div className="flex items-center gap-2 text-primary font-code text-xs uppercase tracking-wider">
+        <div className="flex items-center gap-2 text-primary-strong font-code text-xs uppercase tracking-wider">
 
           <Search size={17} />
 
@@ -149,44 +149,25 @@ function TextScanner() {
       </section>
 
       {/* Main Investigation Workspace */}
-      <section className="bg-surface-container rounded-2xl border border-outline-variant/20 shadow-xl p-4 md:p-6 flex flex-col gap-5">
+      <section className="min-w-0 bg-surface-container rounded-2xl border border-outline-variant/20 shadow-xl p-4 md:p-6 flex flex-col gap-5">
 
         {/* Top Controls */}
         <div className="flex flex-wrap items-center justify-between gap-4">
 
           {/* Language Selector */}
-          <div className="flex items-center gap-2 bg-surface-container-low px-3 py-2 rounded-lg">
-
-            <Languages size={18} className="text-primary" />
-
-            <select
-              value={language}
-              onChange={(event) => setLanguage(event.target.value)}
-              className="bg-transparent text-sm text-on-surface outline-none cursor-pointer max-w-64"
-              aria-label="Select investigation language"
-            >
-
-              {languages.map((item) => (
-                <option
-                  key={item.code}
-                  value={item.code}
-                  className="bg-surface-container-lowest"
-                >
-                  {item.name}
-                </option>
-              ))}
-
-            </select>
-
-          </div>
+          <LanguageDropdown
+            value={language}
+            onChange={setLanguage}
+            options={languages}
+          />
 
           {/* Input Actions */}
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
 
             <button
               type="button"
               onClick={handlePaste}
-              className="flex items-center gap-2 px-3 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition text-xs"
+              className="flex shrink-0 items-center gap-2 px-3 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition text-xs whitespace-nowrap"
             >
               <ClipboardPaste size={15} />
               Paste Clipboard
@@ -195,7 +176,7 @@ function TextScanner() {
             <button
               type="button"
               onClick={handleClear}
-              className="flex items-center gap-2 px-3 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-error transition text-xs"
+              className="flex shrink-0 items-center gap-2 px-3 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-error transition text-xs whitespace-nowrap"
             >
               <Delete size={15} />
               Clear
@@ -206,7 +187,7 @@ function TextScanner() {
         </div>
 
         {/* Text Input */}
-        <div className="relative bg-surface-container-lowest rounded-xl border border-outline-variant/30 focus-within:border-primary/60 focus-within:ring-2 focus-within:ring-primary/10 transition-all p-4">
+        <div className="relative min-w-0 bg-surface-container-lowest rounded-xl border border-outline-variant/30 focus-within:border-primary/60 focus-within:ring-2 focus-within:ring-primary/10 transition-all p-4">
 
           <textarea
             value={text}
@@ -218,7 +199,7 @@ function TextScanner() {
             placeholder="Paste a WhatsApp message, news headline or suspicious viral claim here..."
             rows={8}
             maxLength={5000}
-            className="w-full bg-transparent text-base text-on-surface placeholder:text-outline outline-none resize-y leading-relaxed"
+            className="block w-full min-w-0 max-w-full bg-transparent text-base text-on-surface placeholder:text-outline outline-none resize-y leading-relaxed"
           />
 
           <div className="flex items-center justify-between pt-3 border-t border-outline-variant/20">
@@ -239,7 +220,7 @@ function TextScanner() {
         <div className="flex flex-col gap-3">
 
           <div className="flex items-center gap-2 text-xs text-on-surface-variant">
-            <Sparkles size={15} className="text-primary" />
+            <Sparkles size={15} className="text-primary-strong" />
             TRY A SAMPLE CLAIM
           </div>
 
@@ -301,7 +282,7 @@ function TextScanner() {
 
           <div className="flex items-start gap-3">
 
-            <AlertCircle className="text-primary shrink-0 mt-0.5" size={21} />
+            <AlertCircle className="text-primary-strong shrink-0 mt-0.5" size={21} />
 
             <div>
 
@@ -330,7 +311,7 @@ function TextScanner() {
 
         <div className="flex items-center gap-3 bg-surface-container-low border border-outline-variant/30 rounded-lg p-4">
 
-          <Info size={18} className="text-primary shrink-0" />
+          <Info size={18} className="text-primary-strong shrink-0" />
 
           <p className="text-sm text-on-surface-variant">
             {message}
@@ -341,14 +322,14 @@ function TextScanner() {
       )}
 
       {/* Investigation Information */}
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <section className="grid min-w-0 grid-cols-1 md:grid-cols-2 items-stretch gap-4">
 
         {/* What We Investigate */}
         <div className="bg-surface-container-low rounded-xl p-5 border border-outline-variant/20">
 
           <div className="flex items-center gap-3 mb-4">
 
-            <ShieldCheck size={21} className="text-primary" />
+            <ShieldCheck size={21} className="text-primary-strong" />
 
             <h2 className="font-semibold">
               What GLUCO Investigates
@@ -405,7 +386,7 @@ function TextScanner() {
 
         <div className="w-11 h-11 rounded-xl bg-surface-container-high flex items-center justify-center shrink-0">
 
-          <FileText size={22} className="text-primary" />
+          <FileText size={22} className="text-primary-strong" />
 
         </div>
 
