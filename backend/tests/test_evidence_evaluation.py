@@ -183,3 +183,49 @@ def test_detected_cues_are_returned():
 
     assert "confirmed" in result["detected_support_cues"]
     assert result["detected_contradiction_cues"] == []
+
+def test_unrelated_no_evidence_snippet_is_context_only():
+    claim = (
+        "Officials say there is no scientific evidence "
+        "supporting this claim."
+    )
+
+    results = [
+        {
+            "title": "Alien abduction discussion",
+            "url": "https://example.com/aliens",
+            "snippet": (
+                "There is no evidence that alien abductions "
+                "are real. The claim is not true."
+            ),
+            "score": 0.8,
+        }
+    ]
+
+    output = evaluate_evidence(claim, results)
+
+    result = output["results"][0]
+
+    assert result["relation"] == "context_only"
+
+
+def test_low_relevance_snippet_cannot_receive_directional_label():
+    claim = "Lemon water can cure every disease"
+
+    results = [
+        {
+            "title": "Unrelated scientific report",
+            "url": "https://example.com/unrelated",
+            "snippet": (
+                "There is no evidence that alien abductions "
+                "are real."
+            ),
+            "score": 0.8,
+        }
+    ]
+
+    output = evaluate_evidence(claim, results)
+
+    result = output["results"][0]
+
+    assert result["relation"] == "context_only"

@@ -9,6 +9,9 @@ STOPWORDS = {
     "from", "as", "that", "this", "it", "its",
     "has", "have", "had", "will", "would", "can",
     "could", "should", "do", "does", "did",
+    "officials", "say", "scientific", "evidence",
+    "supporting", "support", "claim", "claims","there",
+
 }
 
 
