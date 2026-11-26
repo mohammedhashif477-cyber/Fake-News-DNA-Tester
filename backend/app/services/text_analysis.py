@@ -11,7 +11,9 @@ from app.intelligence.emotional_manipulation import (
 from app.intelligence.logical_fallacy_scanning import (
     scan_logical_fallacies,
 )
-
+from app.intelligence.source_author_analysis import (
+    analyze_source_and_author,
+)
 
 def analyze_text(request: TextAnalysisRequest):
     """
@@ -33,6 +35,9 @@ def analyze_text(request: TextAnalysisRequest):
     logical_fallacy_analysis = scan_logical_fallacies(
     request.text
 )
+    source_author_analysis = analyze_source_and_author(
+        request.text
+    )
     return {
         "status": "received_not_analyzed",
         "message": (
@@ -49,5 +54,6 @@ def analyze_text(request: TextAnalysisRequest):
             "credibility_indicators": credibility_indicators,
             "emotional_analysis": emotional_analysis,
             "logical_fallacy_analysis": logical_fallacy_analysis,
+            "source_author_analysis": source_author_analysis,
         },
     }
