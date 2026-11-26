@@ -12,18 +12,22 @@ STOPWORDS = {
 }
 
 
+# These cues express a more direct relationship to a claim.
+# Generic phrases such as "according to" and "found that"
+# are intentionally excluded because they do not express stance.
 SUPPORT_CUES = [
     "confirmed",
     "confirms",
-    "according to",
-    "officially announced",
-    "verified",
-    "evidence shows",
-    "found that",
-    "study found",
-    "research shows",
     "supports the claim",
-    "provides evidence for",
+    "supporting evidence for the claim",
+    "provides evidence for the claim",
+    "evidence supports the claim",
+    "evidence confirms the claim",
+    "confirms the claim",
+    "the claim is true",
+    "proves the claim",
+    "proven to be true",
+    "is consistent with the claim",
 ]
 
 
@@ -34,10 +38,12 @@ CONTRADICTION_CUES = [
     "not enough evidence",
     "lack of evidence",
     "not supported by evidence",
-    "does not support",
+    "does not support the claim",
     "does not cure",
     "cannot cure",
     "not a cure",
+    "not a cure-all",
+    "not a cure for",
     "not proven",
     "not been proven",
     "not scientifically proven",
@@ -50,6 +56,8 @@ CONTRADICTION_CUES = [
     "debunked",
     "misleading",
     "denied",
+    "not claiming that",
+    "not claimed to",
 ]
 
 
@@ -144,7 +152,7 @@ def evaluate_evidence(
     Categorize retrieved snippets as preliminary
     evidence candidates.
 
-    Uses keyword overlap and wording cues.
+    Uses keyword overlap and explicit wording cues.
 
     This function does not verify facts and does not
     perform semantic stance detection.
@@ -203,6 +211,8 @@ def evaluate_evidence(
 
         has_support = bool(support_cues)
 
+        # Low keyword overlap means the result may
+        # discuss a related topic rather than the claim.
         if relevance < 0.2:
             relation = "context_only"
 
@@ -211,6 +221,8 @@ def evaluate_evidence(
                 "the claim."
             )
 
+        # Conflicting wording should not receive
+        # a directional label automatically.
         elif (
             has_contradiction
             and has_support
@@ -236,8 +248,8 @@ def evaluate_evidence(
             relation = "potentially_supports"
 
             explanation = (
-                "The snippet contains wording associated "
-                "with confirmation or supporting evidence. "
+                "The snippet contains explicit wording "
+                "associated with support for the claim. "
                 "Human review is needed."
             )
 
@@ -246,7 +258,8 @@ def evaluate_evidence(
 
             explanation = (
                 "The result has keyword overlap with "
-                "the claim, but its stance is unclear."
+                "the claim, but does not contain a clear "
+                "supporting or contradicting cue."
             )
 
         evaluated_results.append({
