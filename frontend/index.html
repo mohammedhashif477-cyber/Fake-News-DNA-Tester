@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
+    <meta
+      name="description"
+      content="GLUCO - AI-powered Fake News Detection and Misinformation Investigation Platform."
+    />
+
+    <meta name="theme-color" content="#051424" />
+
+    <title>GLUCO | Fake News Detection</title>
+
+    <script>
+      const savedTheme = localStorage.getItem('gluco-theme')
+      const theme = savedTheme === 'light' ? 'light' : 'dark'
+      document.documentElement.dataset.theme = theme
+      document.querySelector('meta[name="theme-color"]').content =
+        theme === 'light' ? '#F5F8FC' : '#051424'
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
