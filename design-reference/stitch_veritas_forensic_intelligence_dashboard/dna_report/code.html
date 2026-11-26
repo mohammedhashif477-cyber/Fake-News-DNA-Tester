@@ -1,0 +1,420 @@
+<!DOCTYPE html><html class="dark" lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Plus+Jakarta+Sans:wght@100..900&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode: "class", theme: {extend: {colors: {"tertiary-container": "#1bbd85", "surface-tint": "#4cd7f6", surface: "#051424", "on-tertiary-fixed": "#002113", "tertiary-fixed": "#6ffbbe", "surface-bright": "#2c3a4c", outline: "#869397", "on-surface-variant": "#bcc9cd", "on-primary": "#003640", "inverse-on-surface": "#233143", "on-primary-container": "#00424f", background: "#051424", "on-background": "#d4e4fa", "tertiary-fixed-dim": "#4edea3", "on-primary-fixed-variant": "#004e5c", "primary-container": "#06b6d4", "surface-container-highest": "#273647", "surface-variant": "#273647", "primary-fixed": "#acedff", tertiary: "#4edea3", "inverse-surface": "#d4e4fa", "inverse-primary": "#00687a", "on-secondary-fixed-variant": "#5516be", "secondary-container": "#571bc1", "error-container": "#93000a", error: "#ffb4ab", primary: "#4cd7f6", "on-secondary-fixed": "#23005c", "surface-container-low": "#0d1c2d", "on-primary-fixed": "#001f26", "secondary-fixed-dim": "#d0bcff", "on-tertiary-fixed-variant": "#005236", "on-tertiary": "#003824", "on-error-container": "#ffdad6", "on-secondary-container": "#c4abff", "on-tertiary-container": "#00452e", secondary: "#d0bcff", "outline-variant": "#3d494c", "secondary-fixed": "#e9ddff", "on-error": "#690005", "surface-container": "#122131", "primary-fixed-dim": "#4cd7f6", "surface-dim": "#051424", "surface-container-lowest": "#010f1f", "on-secondary": "#3c0091", "surface-container-high": "#1c2b3c", "on-surface": "#d4e4fa"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {margin: "2rem", "space-2xl": "4rem", "gutter-mobile": "1rem", "space-lg": "1.5rem", "space-xl": "2.5rem", "space-2xs": "0.25rem", "margin-mobile": "1rem", gutter: "1.5rem", "space-sm": "0.75rem", "space-md": "1rem", "space-xs": "0.5rem"}, fontFamily: {"body-lg": ["Inter"], "headline-xl": ["Plus Jakarta Sans"], "label-sm": ["Inter"], "body-sm": ["Inter"], "code-sm": ["JetBrains Mono"], "headline-xl-mobile": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "body-md": ["Inter"], "headline-sm": ["Plus Jakarta Sans"], "label-md": ["Inter"], "headline-md": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], headline: ["Plus Jakarta Sans"], display: ["Plus Jakarta Sans"], body: ["Inter"], label: ["Inter"]}, fontSize: {"body-lg": ["1.125rem", {lineHeight: "1.875rem", letterSpacing: "-0.005em", fontWeight: "400"}], "headline-xl": ["3rem", {lineHeight: "3.5rem", letterSpacing: "-0.03em", fontWeight: "700"}], "label-sm": ["0.75rem", {lineHeight: "1rem", letterSpacing: "0.04em", fontWeight: "600"}], "body-sm": ["0.875rem", {lineHeight: "1.45rem", letterSpacing: "0em", fontWeight: "400"}], "code-sm": ["0.8125rem", {lineHeight: "1.25rem", letterSpacing: "0em", fontWeight: "400"}], "headline-xl-mobile": ["2rem", {lineHeight: "2.5rem", letterSpacing: "-0.02em", fontWeight: "700"}], "headline-lg-mobile": ["1.625rem", {lineHeight: "2.125rem", letterSpacing: "-0.015em", fontWeight: "600"}], "body-md": ["1rem", {lineHeight: "1.65rem", letterSpacing: "0em", fontWeight: "400"}], "headline-sm": ["1.25rem", {lineHeight: "1.75rem", letterSpacing: "-0.01em", fontWeight: "600"}], "label-md": ["0.875rem", {lineHeight: "1.25rem", letterSpacing: "0.01em", fontWeight: "500"}], "headline-md": ["1.5rem", {lineHeight: "2rem", letterSpacing: "-0.015em", fontWeight: "600"}], "headline-lg": ["2.25rem", {lineHeight: "2.75rem", letterSpacing: "-0.025em", fontWeight: "600"}]}}}};</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest z-50 flex flex-col justify-between py-space-md shadow-[0_1px_8px_rgba(0,0,0,0.2)]"><div class="flex flex-col gap-space-lg"><div class="px-space-md flex items-center gap-space-sm"><div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center text-primary"><span class="material-symbols-outlined text-[20px]">verified</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight leading-none">VeritasDNA</span><span class="font-label-sm text-label-sm text-on-surface-variant font-normal mt-space-2xs">Fact &amp; Truth Check</span></div></div><div class="px-space-xs"><nav class="flex flex-col gap-space-2xs" data-active-classes="bg-surface-container text-primary font-semibold"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[18px]">home</span><span class="font-label-md text-label-md">Dashboard</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="text-scanner" href="#"><span class="material-symbols-outlined text-[18px]">description</span><span class="font-label-md text-label-md">Text Scanner</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="image-scanner" href="#"><span class="material-symbols-outlined text-[18px]">image</span><span class="font-label-md text-label-md">Image Scanner</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="video-scanner" href="#"><span class="material-symbols-outlined text-[18px]">movie</span><span class="font-label-md text-label-md">Video Scanner</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg transition-colors bg-surface-container text-primary font-semibold" data-path="dna-report" href="#"><span class="material-symbols-outlined text-[18px]">policy</span><span class="font-label-md text-label-md">DNA Report</span></a></nav></div></div><div class="px-space-sm flex flex-col gap-space-xs"><div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-space-2xs"><div class="flex items-center justify-between text-on-surface-variant"><span class="font-label-sm text-label-sm">Consensus Engine</span><span class="w-2 h-2 rounded-full bg-tertiary"></span></div><span class="font-code-sm text-code-sm text-on-surface">v2.4.0 • Real-time</span></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/85 backdrop-blur-xl z-40 shadow-[0_1px_8px_rgba(0,0,0,0.06)]"><div class="h-16 w-full px-space-lg flex items-center justify-between gap-space-md"><div class="flex-1 max-w-xl"><div class="h-10 px-space-sm rounded-lg bg-surface-container-low flex items-center gap-space-xs text-on-surface-variant focus-within:text-on-surface"><span class="material-symbols-outlined text-[18px]">search</span><input class="w-full bg-transparent font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none" placeholder="Search verified claims or paste link..." type="text"><kbd class="font-code-sm text-code-sm px-space-2xs py-0.5 rounded bg-surface-container text-on-surface-variant">⌘K</kbd></div></div><div class="flex items-center gap-space-sm"><div class="h-9 px-space-sm rounded-lg bg-surface-container-low flex items-center gap-space-xs text-on-surface-variant cursor-pointer hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[16px]">translate</span><select class="bg-transparent font-label-sm text-label-sm text-on-surface focus:outline-none cursor-pointer"><option class="bg-surface-container text-on-surface" value="en">English</option><option class="bg-surface-container text-on-surface" value="hi">हिन्दी</option><option class="bg-surface-container text-on-surface" value="ml">മലയാളം</option><option class="bg-surface-container text-on-surface" value="ta">தமிழ்</option><option class="bg-surface-container text-on-surface" value="kn">ಕನ್ನಡ</option></select></div><button class="h-9 w-9 rounded-lg bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Help &amp; Documentation"><span class="material-symbols-outlined text-[18px]">help_outline</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="relative w-full pt-16 bg-surface px-space-lg pb-space-2xl min-h-screen"><div class="flex flex-col w-full">
+<div class="w-full max-w-7xl mx-auto flex flex-col gap-space-xl">
+<!-- Top Context & Investigation Banner -->
+<div class="flex flex-col gap-space-md">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-primary">verified_user</span>
+<span class="font-code-sm text-code-sm uppercase tracking-wider text-primary">VeritasDNA Registry</span>
+<span>/</span>
+<span>Reports</span>
+<span>/</span>
+<span class="text-on-surface font-code-sm text-code-sm">#V-8942</span>
+</div>
+<div class="flex items-center gap-space-2xs text-on-surface-variant font-code-sm text-code-sm"><span class="w-2 h-2 rounded-full bg-tertiary"></span><span class="text-tertiary font-medium">Fact-Checked &amp; Verified</span><span class="text-outline mx-1">•</span><span>Public Record Registry</span></div>
+</div>
+<!-- Main Status Module -->
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col md:flex-row md:items-center justify-between gap-space-lg shadow-sm">
+<div class="flex flex-col gap-space-xs max-w-3xl">
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-error-container/20 text-error font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px]" style="font-variation-settings: 'FILL' 1;">cancel</span>
+              Confirmed False Claim
+            </span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-code-sm text-code-sm">
+              Recycled Rumor • Fabricated Circular
+            </span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight mt-space-2xs">
+            Coordinated WhatsApp Forward: “Regional Banking Liquidity Shutdown and Emergency Holiday”
+          </h1>
+<div class="flex flex-wrap items-center gap-y-1 gap-x-space-md text-on-surface-variant font-body-sm text-body-sm mt-space-2xs">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+              Analyzed 28 Feb 2025 at 09:14 IST
+            </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">translate</span>
+              Hindi original (English translation verified)
+            </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">share</span>
+              Flagged in 34 forward clusters
+            </span>
+</div>
+</div>
+<!-- Quick Share / Action Buttons -->
+<div class="flex flex-wrap md:flex-col gap-space-xs justify-start shrink-0">
+<button class="inline-flex items-center justify-center gap-space-xs px-space-md py-2.5 rounded-lg bg-primary hover:bg-primary-fixed-dim text-on-primary font-label-md text-label-md transition-all active:scale-[0.98]" id="copyWhatsAppBtn" onclick="copyDebunkText()">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+<span>Copy WhatsApp Debunk</span>
+</button>
+<div class="flex gap-space-2xs">
+<button class="flex-1 inline-flex items-center justify-center gap-1.5 px-space-sm py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors" onclick="downloadPdfReport()">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">download</span>
+<span>PDF</span>
+</button>
+<button class="flex-1 inline-flex items-center justify-center gap-1.5 px-space-sm py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors" onclick="shareLinkReport()">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">link</span>
+<span>Share</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Alert / Toast Banner for Interactive Copy -->
+<div class="hidden transition-all duration-300 -mt-space-md bg-surface-container-high text-primary px-space-md py-space-xs rounded-lg font-body-sm text-body-sm flex items-center justify-between" id="copyToast">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-tertiary">check_circle</span>
+<span>Debunk note copied! Ready to paste directly into your WhatsApp family group or forward thread.</span>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface" onclick="document.getElementById('copyToast').classList.add('hidden')">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<!-- Split-Pane: 65% Main Investigation vs 35% Evidence Sidebar -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- Primary Investigation Workspace (Col 8) -->
+<div class="lg:col-span-8 flex flex-col gap-space-lg min-w-0">
+<!-- Summary Card: Perplexity-style Plain Language debunker -->
+<section class="bg-surface-container-low rounded-xl p-space-lg flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">psychology_alt</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Executive Plain-Language Summary</span>
+</div>
+<span class="text-on-surface-variant font-label-sm text-label-sm">Citizen-Clear Format</span>
+</div>
+<div class="flex flex-col gap-space-sm font-body-lg text-body-lg text-on-surface leading-relaxed">
+<p>
+              A widely circulated image and message claims that the Reserve Bank of India (RBI) has mandated an emergency 5-day total shutdown of all private and nationalized bank ATMs starting tomorrow midnight, alleging acute digital currency liquidity shortages. The message urges users to immediately withdraw cash and forward the warning to at least ten contacts.
+            </p>
+<p class="text-on-surface-variant font-body-md text-body-md">
+<strong class="text-error font-medium">This statement is entirely untruthful.</strong> The attached gazette photo is an edited copy of an old public holiday notification from October 2021. The Reserve Bank of India officially issued statement <span class="font-code-sm text-code-sm text-primary">PR-2025/112</span> confirming all clearing houses, digital payment gateways (UPI, NEFT, RTGS), and ATM cash-replenishment logistics are functioning at standard capacity without any unscheduled interruptions.
+            </p>
+</div>
+<div class="pt-space-xs flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Primary Clarification Authority:</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-primary font-code-sm text-code-sm">Reserve Bank of India (Dept of Communication)</span>
+</div>
+</section>
+<!-- Claim-Level Breakdown (Atomic Assertions) -->
+<section class="bg-surface-container-low rounded-xl p-space-lg flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">rule</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Specific Claims Tested</h2>
+</div>
+<span class="font-code-sm text-code-sm text-on-surface-variant">2 core assertions</span>
+</div>
+<div class="flex flex-col gap-space-sm"><div class="bg-surface-container rounded-lg p-space-md flex flex-col gap-space-xs"><div class="flex items-center gap-2 mb-1"><span class="px-2 py-0.5 rounded text-[12px] bg-primary/20 text-primary font-semibold uppercase tracking-wider">Factual Claim Check</span><span class="text-outline text-label-sm">• Official Statement</span></div><div class="flex items-start justify-between gap-space-sm"><div class="flex items-start gap-space-xs"><span class="font-code-sm text-code-sm text-outline px-1.5 py-0.5 rounded bg-surface-container-high mt-0.5">01</span><div class="flex flex-col"><span class="font-body-md text-body-md text-on-surface font-medium">“All private and public bank ATMs will suspend operations nationwide for 5 straight business days.”</span><span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Official bank schedules, National Payments Corporation (NPCI) metrics, and cash logistics associations confirm 100% normal operational SLA.</span></div></div><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-error-container/20 text-error font-label-sm text-label-sm shrink-0"><span class="material-symbols-outlined text-[14px]">cancel</span>False</span></div></div><div class="bg-surface-container rounded-lg p-space-md flex flex-col gap-space-xs"><div class="flex items-center gap-2 mb-1"><span class="px-2 py-0.5 rounded text-[12px] bg-secondary-container/40 text-secondary font-semibold uppercase tracking-wider">Media Authenticity Check</span><span class="text-outline text-label-sm">• Circular Image Tampering</span></div><div class="flex items-start justify-between gap-space-sm"><div class="flex items-start gap-space-xs"><span class="font-code-sm text-code-sm text-outline px-1.5 py-0.5 rounded bg-surface-container-high mt-0.5">02</span><div class="flex flex-col"><span class="font-body-md text-body-md text-on-surface font-medium">“Emergency gazette circular #SEC-14/FIN was signed by the Governor ordering this closure.”</span><span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Forensic ELA confirms the document is a digitally edited photo of an old October 2021 holiday notification. The referenced section number covers municipal drainage bylaws.</span></div></div><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-error-container/20 text-error font-label-sm text-label-sm shrink-0"><span class="material-symbols-outlined text-[14px]">gavel</span>Fabricated Image</span></div></div></div>
+</section>
+<!-- Linear-Style Expandable Accordions: 6 Diagnostic Vectors -->
+<section class="bg-surface-container-low rounded-xl p-space-lg flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">biotech</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Six Forensic Diagnostic Dimensions</h2>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Click to expand details</span>
+</div>
+<div class="flex flex-col gap-space-2xs" id="accordionGroup">
+<!-- Accordion 1: Fact Check Matches -->
+<div class="bg-surface-container rounded-lg overflow-hidden transition-colors">
+<button class="w-full px-space-md py-space-sm flex items-center justify-between text-left hover:bg-surface-container-high/60 transition-colors" onclick="toggleAccordion('acc-1')">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-primary text-[18px]">fact_check</span>
+<div class="flex flex-col sm:flex-row sm:items-center gap-x-2 min-w-0">
+<span class="font-body-md text-body-md font-medium text-on-surface">Fact-Check Matches</span>
+<span class="text-on-surface-variant font-body-sm text-body-sm truncate">3 recognized verifications found (PIB, BOOM, The Quint)</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px] transition-transform" id="acc-1-icon">expand_more</span>
+</button>
+<div class="hidden px-space-md pb-space-md pt-space-2xs text-on-surface-variant font-body-sm text-body-sm flex flex-col gap-space-xs bg-surface-container-lowest/30" id="acc-1">
+<p>Cross-referenced through the International Fact-Checking Network (IFCN) knowledge graph. PIB Fact Check initially debunked this identical phrasing on 14 October 2021. Independent checks by BOOMLive and The Quint verified the letterhead signature is an overlaid transparent PNG from a 2018 public symposium certificate.</p>
+<div class="flex flex-wrap gap-2 pt-1">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-primary font-code-sm text-code-sm">PIB Ref: FC-9821</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-primary font-code-sm text-code-sm">BOOM ID: 2025-02-B8</span>
+</div>
+</div>
+</div>
+<!-- Accordion 2: Emotional Tone & Urgency -->
+<div class="bg-surface-container rounded-lg overflow-hidden transition-colors">
+<button class="w-full px-space-md py-space-sm flex items-center justify-between text-left hover:bg-surface-container-high/60 transition-colors" onclick="toggleAccordion('acc-2')">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-primary text-[18px]">sentiment_very_dissatisfied</span>
+<div class="flex flex-col sm:flex-row sm:items-center gap-x-2 min-w-0">
+<span class="font-body-md text-body-md font-medium text-on-surface">Emotional Tone &amp; Urgency</span>
+<span class="text-on-surface-variant font-body-sm text-body-sm truncate">High synthetic panic rating (94/100)</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px] transition-transform" id="acc-2-icon">expand_more</span>
+</button>
+<div class="hidden px-space-md pb-space-md pt-space-2xs text-on-surface-variant font-body-sm text-body-sm flex flex-col gap-space-xs bg-surface-container-lowest/30" id="acc-2">
+<p>Natural Language analysis shows concentrated “Artificial Urgency” cues designed to bypass critical thinking: imperative calls to action (“Share before 10 PM”, “Alert everyone immediately”), all-caps typographic screaming, and emotional guilt-tripping (“Do not be selfish, warn your relatives”).</p>
+<div class="grid grid-cols-2 gap-2 text-on-surface mt-1">
+<div class="bg-surface-container-high p-2 rounded">
+<span class="text-outline font-label-sm text-label-sm block">Panic Index</span>
+<span class="font-headline-sm text-headline-sm text-error">94%</span>
+</div>
+<div class="bg-surface-container-high p-2 rounded">
+<span class="text-outline font-label-sm text-label-sm block">Syntactic Coercion</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Critical</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Accordion 3: Language & Translation Origin -->
+<div class="bg-surface-container rounded-lg overflow-hidden transition-colors">
+<button class="w-full px-space-md py-space-sm flex items-center justify-between text-left hover:bg-surface-container-high/60 transition-colors" onclick="toggleAccordion('acc-3')">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-primary text-[18px]">translate</span>
+<div class="flex flex-col sm:flex-row sm:items-center gap-x-2 min-w-0">
+<span class="font-body-md text-body-md font-medium text-on-surface">Language &amp; Translation Origin</span>
+<span class="text-on-surface-variant font-body-sm text-body-sm truncate">Machine-translated from 2021 English chain letter</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px] transition-transform" id="acc-3-icon">expand_more</span>
+</button>
+<div class="hidden px-space-md pb-space-md pt-space-2xs text-on-surface-variant font-body-sm text-body-sm flex flex-col gap-space-xs bg-surface-container-lowest/30" id="acc-3">
+<p>Grammatical parsing indicates direct statistical translation artifact patterns from an English template. Idiomatic banking terminology (“liquidity dry run”) was translated literally into Hindi as “taralta sookha daud”, a phrase that does not exist in standard Hindi administrative lexicon.</p>
+</div>
+</div>
+<!-- Accordion 4: Media & Attachment Checks -->
+<div class="bg-surface-container rounded-lg overflow-hidden transition-colors">
+<button class="w-full px-space-md py-space-sm flex items-center justify-between text-left hover:bg-surface-container-high/60 transition-colors" onclick="toggleAccordion('acc-4')">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-primary text-[18px]">image_search</span>
+<div class="flex flex-col sm:flex-row sm:items-center gap-x-2 min-w-0">
+<span class="font-body-md text-body-md font-medium text-on-surface">Media &amp; Attachment Checks</span>
+<span class="text-on-surface-variant font-body-sm text-body-sm truncate">Digital tampering detected in header date</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px] transition-transform" id="acc-4-icon">expand_more</span>
+</button>
+<div class="hidden px-space-md pb-space-md pt-space-2xs text-on-surface-variant font-body-sm text-body-sm flex flex-col gap-space-xs bg-surface-container-lowest/30" id="acc-4">
+<p>Forensic error-level analysis (ELA) on the shared JPEG circular revealed pixel noise inconsistency around the date stamp “28 February 2025”. The font used in the date string is Arial 12pt, whereas the remainder of the authentic government document uses Monotype Baskerville.</p>
+<div class="p-2 rounded bg-surface-container-high font-code-sm text-code-sm text-on-surface">
+                  ELA Tamper Confidence: 99.1% • Compression Discontinuity: High
+                </div>
+</div>
+</div>
+<!-- Accordion 5: Network Viral Velocity -->
+<div class="bg-surface-container rounded-lg overflow-hidden transition-colors">
+<button class="w-full px-space-md py-space-sm flex items-center justify-between text-left hover:bg-surface-container-high/60 transition-colors" onclick="toggleAccordion('acc-5')">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-primary text-[18px]">hub</span>
+<div class="flex flex-col sm:flex-row sm:items-center gap-x-2 min-w-0">
+<span class="font-body-md text-body-md font-medium text-on-surface">Network Viral Velocity</span>
+<span class="text-on-surface-variant font-body-sm text-body-sm truncate">Cross-forwarded broadcast injection pattern</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px] transition-transform" id="acc-5-icon">expand_more</span>
+</button>
+<div class="hidden px-space-md pb-space-md pt-space-2xs text-on-surface-variant font-body-sm text-body-sm flex flex-col gap-space-xs bg-surface-container-lowest/30" id="acc-5">
+<p>First recorded forward influx initiated at 06:12 AM IST across regional neighborhood and resident association groups. Reached secondary amplification threshhold (+450%) within 90 minutes. Labeled as “Forwarded many times” across 82% of observed instances.</p>
+</div>
+</div>
+<!-- Accordion 6: Official Registry Verification -->
+<div class="bg-surface-container rounded-lg overflow-hidden transition-colors">
+<button class="w-full px-space-md py-space-sm flex items-center justify-between text-left hover:bg-surface-container-high/60 transition-colors" onclick="toggleAccordion('acc-6')">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-primary text-[18px]">domain_verification</span>
+<div class="flex flex-col sm:flex-row sm:items-center gap-x-2 min-w-0">
+<span class="font-body-md text-body-md font-medium text-on-surface">Official Registry Verification</span>
+<span class="text-on-surface-variant font-body-sm text-body-sm truncate">RBI Press Release PR-2025/112 directly refutes</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px] transition-transform" id="acc-6-icon">expand_more</span>
+</button>
+<div class="hidden px-space-md pb-space-md pt-space-2xs text-on-surface-variant font-body-sm text-body-sm flex flex-col gap-space-xs bg-surface-container-lowest/30" id="acc-6">
+<p>The Reserve Bank of India official portal (rbi.org.in) maintains a live ticker of scheduled banking closures under the Negotiable Instruments Act. No unscheduled nationwide closures have been mandated for this calendar week.</p>
+<div class="flex items-center gap-2 mt-1">
+<a class="text-primary hover:underline font-label-sm text-label-sm inline-flex items-center gap-1" href="https://rbi.org.in" target="_blank">
+<span>Inspect RBI Official Notification Portal</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Source Provenance Step Timeline -->
+<section class="bg-surface-container-low rounded-xl p-space-lg flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">history_toggle_off</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Source Provenance &amp; Mutation History</h2>
+</div>
+<span class="font-code-sm text-code-sm text-on-surface-variant">3-Year Evolution</span>
+</div>
+<!-- Clean Vertical Linear Step Line -->
+<div class="relative pl-6 flex flex-col gap-space-lg">
+<!-- Timeline vertical connector bar -->
+<div class="absolute left-2.5 top-3 bottom-3 w-0.5 bg-surface-container-high"></div>
+<!-- Event 1: 2021 -->
+<div class="relative flex items-start gap-space-md">
+<div class="absolute -left-6 top-1 w-5 h-5 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+</div>
+<div class="flex flex-col gap-1 bg-surface-container/60 p-space-md rounded-lg w-full">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold">October 2021 • First Recorded Inception</span>
+<span class="font-code-sm text-code-sm text-outline">v1.0 Baseline</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  First emerged on Telegram channels during regional assembly elections claiming bank closures to stall campaign finance. Debunked by Press Information Bureau (PIB) within 48 hours.
+                </p>
+</div>
+</div>
+<!-- Event 2: 2023 -->
+<div class="relative flex items-start gap-space-md">
+<div class="absolute -left-6 top-1 w-5 h-5 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+</div>
+<div class="flex flex-col gap-1 bg-surface-container/60 p-space-md rounded-lg w-full">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold">March 2023 • Mutation 1 (Tax Filing Resurgence)</span>
+<span class="font-code-sm text-code-sm text-outline">v2.1 Re-skinned</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Re-surfaced ahead of fiscal year-end with modified dates and a fake signature of the Chief General Manager added to the bottom left of the graphic image.
+                </p>
+</div>
+</div>
+<!-- Event 3: Present Day -->
+<div class="relative flex items-start gap-space-md">
+<div class="absolute -left-6 top-1 w-5 h-5 rounded-full bg-surface-container flex items-center justify-center text-error">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+</div>
+<div class="flex flex-col gap-1 bg-surface-container p-space-md rounded-lg w-full">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold text-error">Yesterday • Mutation 2 (Current Viral Variant)</span>
+<span class="font-code-sm text-code-sm text-error font-medium">Active Strain</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Re-circulated with specific regional cooperative and private bank names added to make the message feel local to Maharashtra and Karnataka WhatsApp groups.
+                </p>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Rail (Col 4): Evidence, WhatsApp Forward Unpacker & Citations -->
+<div class="lg:col-span-4 flex flex-col gap-space-lg">
+<!-- Forward Unpacker Card (WhatsApp Comparison Module) -->
+<div class="rounded-xl p-space-md flex flex-col gap-space-md bg-surface-container-low">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs text-on-surface">
+<span class="material-symbols-outlined text-[18px] text-tertiary">difference</span>
+<span class="font-headline-sm text-headline-sm">Forward vs. Reality</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container text-tertiary">Quick Read</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-error">Rumor Claims:</span>
+<div class="p-space-sm rounded-lg bg-surface-container text-on-surface-variant font-body-sm text-body-sm italic">
+              “Alert! ATMs closing midnight for 5 days nationwide. Withdraw maximum cash today before shutdown occurs.”
+            </div>
+</div>
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-tertiary">Verified Truth:</span>
+<div class="p-space-sm rounded-lg bg-surface-container text-on-surface font-body-sm text-body-sm">
+              All bank branches and cash points maintain normal schedules. UPI, cards, and ATMs operate without restrictions.
+            </div>
+</div>
+<button class="w-full py-2 px-space-sm rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-md text-label-md text-center transition-colors flex items-center justify-center gap-1.5" onclick="copyDebunkText()">
+<span class="material-symbols-outlined text-[16px] text-primary">content_copy</span>
+<span>Copy Clarification Note</span>
+</button>
+</div>
+<!-- Evidence & Direct Reference Citations -->
+<div class="rounded-xl p-space-md flex flex-col gap-space-md bg-surface-container-low">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">menu_book</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Primary Sources</span>
+</div>
+<span class="font-code-sm text-code-sm text-on-surface-variant">3 Direct links</span>
+</div>
+<div class="flex flex-col gap-space-xs"><a class="p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors flex items-center justify-between gap-space-xs group" href="https://rbi.org.in" target="_blank"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-[20px] text-primary">account_balance</span></div><div class="flex flex-col min-w-0"><span class="font-label-md text-label-md text-on-surface font-medium group-hover:text-primary transition-colors">RBI Press Clarification</span><span class="font-body-sm text-body-sm text-on-surface-variant">Official Release PR-2025/112</span></div></div><span class="material-symbols-outlined text-[18px] text-outline group-hover:text-primary transition-colors">open_in_new</span></a><a class="p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors flex items-center justify-between gap-space-xs group" href="https://pib.gov.in" target="_blank"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded bg-tertiary/10 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-[20px] text-tertiary">verified</span></div><div class="flex flex-col min-w-0"><span class="font-label-md text-label-md text-on-surface font-medium group-hover:text-tertiary transition-colors">PIB Fact Check Registry</span><span class="font-body-sm text-body-sm text-on-surface-variant">Govt Fact Counter #FC-9821</span></div></div><span class="material-symbols-outlined text-[18px] text-outline group-hover:text-tertiary transition-colors">open_in_new</span></a><a class="p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors flex items-center justify-between gap-space-xs group" href="https://indianexpress.com" target="_blank"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded bg-surface-container-high flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-[20px] text-on-surface-variant">newspaper</span></div><div class="flex flex-col min-w-0"><span class="font-label-md text-label-md text-on-surface font-medium group-hover:text-primary transition-colors">Indian Express Fact Sheet</span><span class="font-body-sm text-body-sm text-on-surface-variant">Banking Wire Correspondent Report</span></div></div><span class="material-symbols-outlined text-[18px] text-outline group-hover:text-primary transition-colors">open_in_new</span></a></div>
+</div>
+<!-- Automated Confidence Synthesis Visualization -->
+<div class="rounded-xl p-space-md flex flex-col gap-space-sm bg-surface-container-low">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Consensus Confidence</span>
+<span class="font-code-sm text-code-sm text-primary">99.8% Definite</span>
+</div>
+<!-- Non-gamified quiet horizontal track with ticks -->
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden flex">
+<div class="bg-primary h-full w-[99.8%] rounded-full"></div>
+</div>
+<div class="flex justify-between items-center text-outline font-code-sm text-code-sm pt-1">
+<span>Govt Gazettes (100%)</span>
+<span>IFCN Consensus (3/3)</span>
+</div>
+</div>
+<!-- Transparent Limitations & Uncertainty Note -->
+<div class="rounded-xl p-space-md flex flex-col gap-space-xs bg-surface-container-lowest"><div class="flex items-center gap-1.5 text-primary mb-1"><span class="material-symbols-outlined text-[18px]">shield_with_heart</span><span class="font-label-md text-label-md font-semibold text-on-surface">Limitations &amp; Scope</span></div><div class="flex flex-col gap-space-xs text-body-sm font-body-sm text-on-surface-variant"><div class="flex items-start gap-2"><span class="material-symbols-outlined text-tertiary text-[16px] shrink-0 mt-0.5">check_circle</span><span><strong>What we guarantee:</strong> Verification against official RBI gazettes, NPCI switch records, and multi-agency fact-check registries.</span></div><div class="flex items-start gap-2"><span class="material-symbols-outlined text-outline text-[16px] shrink-0 mt-0.5">cancel</span><span><strong>What we cannot trace:</strong> Due to WhatsApp end-to-end encryption, the specific individual who first typed the message cannot and will not be identified.</span></div></div></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  function toggleAccordion(id) {
+    const el = document.getElementById(id);
+    const icon = document.getElementById(id + '-icon');
+    if (!el) return;
+
+    if (el.classList.contains('hidden')) {
+      el.classList.remove('hidden');
+      if (icon) icon.classList.add('rotate-180');
+    } else {
+      el.classList.add('hidden');
+      if (icon) icon.classList.remove('rotate-180');
+    }
+  }
+
+  function copyDebunkText() {
+    const textToCopy = `🛑 FAKE NEWS ALERT: The message claiming all ATMs and bank branches are shutting down for 5 days is FALSE.\\n\\nOfficial Reality: The Reserve Bank of India (RBI) confirmed that all ATMs, branches, and online services (UPI, NEFT) are operating normally. The attached notification is a forged 2021 circular.\\n\\nVerified via VeritasDNA: https://veritasdna.org/report/V-8942`;
+    
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(textToCopy).then(showToast);
+    } else {
+      // Fallback
+      const ta = document.createElement('textarea');
+      ta.value = textToCopy;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast();
+    }
+  }
+
+  function showToast() {
+    const toast = document.getElementById('copyToast');
+    if (toast) {
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 5000);
+    }
+  }
+
+  function downloadPdfReport() {
+    alert("Compiling VeritasDNA cryptographic inspection audit for #V-8942 as standard PDF...");
+  }
+
+  function shareLinkReport() {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(window.location.href);
+      showToast();
+    }
+  }
+</script></main></div>
+
+</body></html>
