@@ -1,0 +1,264 @@
+﻿diff --git a/backend/app/intelligence/evidence_evaluation.py b/backend/app/intelligence/evidence_evaluation.py
+index 273e796..5050961 100644
+--- a/backend/app/intelligence/evidence_evaluation.py
++++ b/backend/app/intelligence/evidence_evaluation.py
+@@ -12,18 +12,22 @@ STOPWORDS = {
+ }
+ 
+ 
++# These cues express a more direct relationship to a claim.
++# Generic phrases such as "according to" and "found that"
++# are intentionally excluded because they do not express stance.
+ SUPPORT_CUES = [
+     "confirmed",
+     "confirms",
+-    "according to",
+-    "officially announced",
+-    "verified",
+-    "evidence shows",
+-    "found that",
+-    "study found",
+-    "research shows",
+     "supports the claim",
+-    "provides evidence for",
++    "supporting evidence for the claim",
++    "provides evidence for the claim",
++    "evidence supports the claim",
++    "evidence confirms the claim",
++    "confirms the claim",
++    "the claim is true",
++    "proves the claim",
++    "proven to be true",
++    "is consistent with the claim",
+ ]
+ 
+ 
+@@ -34,10 +38,12 @@ CONTRADICTION_CUES = [
+     "not enough evidence",
+     "lack of evidence",
+     "not supported by evidence",
+-    "does not support",
++    "does not support the claim",
+     "does not cure",
+     "cannot cure",
+     "not a cure",
++    "not a cure-all",
++    "not a cure for",
+     "not proven",
+     "not been proven",
+     "not scientifically proven",
+@@ -50,6 +56,8 @@ CONTRADICTION_CUES = [
+     "debunked",
+     "misleading",
+     "denied",
++    "not claiming that",
++    "not claimed to",
+ ]
+ 
+ 
+@@ -144,7 +152,7 @@ def evaluate_evidence(
+     Categorize retrieved snippets as preliminary
+     evidence candidates.
+ 
+-    Uses keyword overlap and wording cues.
++    Uses keyword overlap and explicit wording cues.
+ 
+     This function does not verify facts and does not
+     perform semantic stance detection.
+@@ -203,6 +211,8 @@ def evaluate_evidence(
+ 
+         has_support = bool(support_cues)
+ 
++        # Low keyword overlap means the result may
++        # discuss a related topic rather than the claim.
+         if relevance < 0.2:
+             relation = "context_only"
+ 
+@@ -211,6 +221,8 @@ def evaluate_evidence(
+                 "the claim."
+             )
+ 
++        # Conflicting wording should not receive
++        # a directional label automatically.
+         elif (
+             has_contradiction
+             and has_support
+@@ -236,8 +248,8 @@ def evaluate_evidence(
+             relation = "potentially_supports"
+ 
+             explanation = (
+-                "The snippet contains wording associated "
+-                "with confirmation or supporting evidence. "
++                "The snippet contains explicit wording "
++                "associated with support for the claim. "
+                 "Human review is needed."
+             )
+ 
+@@ -246,7 +258,8 @@ def evaluate_evidence(
+ 
+             explanation = (
+                 "The result has keyword overlap with "
+-                "the claim, but its stance is unclear."
++                "the claim, but does not contain a clear "
++                "supporting or contradicting cue."
+             )
+ 
+         evaluated_results.append({
+diff --git a/backend/app/services/text_analysis.py b/backend/app/services/text_analysis.py
+index bd6d932..d497cb4 100644
+--- a/backend/app/services/text_analysis.py
++++ b/backend/app/services/text_analysis.py
+@@ -17,21 +17,27 @@ from app.intelligence.source_author_analysis import (
+ from app.intelligence.evidence_retrieval import (
+     retrieve_evidence,
+ )
++from app.intelligence.evidence_evaluation import (
++    evaluate_evidence,
++)
++
++
++MAX_EVIDENCE_CLAIMS = 3
+ 
+ 
+ def analyze_text(request: TextAnalysisRequest):
+     """
+     Analyze submitted text using preliminary indicators
+-    and retrieve candidate evidence for extracted claims.
++    and retrieve and evaluate candidate evidence.
+ 
+-    Retrieved evidence does not establish whether a claim
+-    is true or false.
++    Retrieved evidence and keyword-based evaluation
++    do not establish whether a claim is true or false.
+     """
+ 
+     claims = extract_claims(request.text)
+ 
+-    credibility_indicators = calculate_credibility_indicators(
+-        request.text
++    credibility_indicators = (
++        calculate_credibility_indicators(request.text)
+     )
+ 
+     emotional_analysis = detect_emotional_manipulation(
+@@ -46,13 +52,14 @@ def analyze_text(request: TextAnalysisRequest):
+         request.text
+     )
+ 
+-    # Limit searches to the first 3 candidate claims
+-    # to control API usage.
+     evidence_for_claims = []
+ 
+-    for claim in claims[:3]:
++    claims_to_search = claims[:MAX_EVIDENCE_CLAIMS]
++
++    for claim in claims_to_search:
+         try:
+             evidence = retrieve_evidence(claim)
++
+         except Exception:
+             evidence = {
+                 "status": "retrieval_error",
+@@ -61,20 +68,69 @@ def analyze_text(request: TextAnalysisRequest):
+                 "message": "Evidence retrieval failed.",
+             }
+ 
++        if evidence.get("status") == "success":
++            try:
++                evaluation_result = evaluate_evidence(
++                    claim,
++                    evidence.get("results", []),
++                )
++
++                evidence_evaluation = {
++                    "status": "success",
++                    **evaluation_result,
++                }
++
++            except Exception:
++                evidence_evaluation = {
++                    "status": "evaluation_error",
++                    "claim": claim,
++                    "results": [],
++                    "message": (
++                        "Evidence evaluation failed."
++                    ),
++                }
++
++        else:
++            evidence_evaluation = {
++                "status": "not_evaluated",
++                "claim": claim,
++                "results": [],
++                "message": (
++                    "Evidence evaluation was skipped "
++                    "because retrieval was unsuccessful."
++                ),
++            }
++
+         evidence_for_claims.append({
+             "claim": claim,
+             "evidence": evidence,
+-            })
++            "evidence_evaluation": evidence_evaluation,
++        })
++
++    searched_claim_count = len(claims_to_search)
++
++    unsearched_claim_count = max(
++        0,
++        len(claims) - searched_claim_count,
++    )
++
++    provenance_status = (
++        "not_implemented"
++        if request.include_provenance
++        else "not_requested"
++    )
+ 
+     return {
+         "status": "analysis_with_evidence_candidates",
+         "message": (
+             "Candidate claims and textual indicators "
+             "generated. Evidence search was attempted "
+-            "for up to 3 claims. Retrieved sources are "
+-            "evidence candidates, not verified facts. "
+-            "Automated factual verification is not "
+-            "implemented."
++            f"for up to {MAX_EVIDENCE_CLAIMS} claims. "
++            "Retrieved sources and keyword-based "
++            "classifications are preliminary evidence "
++            "candidates, not verified facts. "
++            "Automated factual verification and "
++            "provenance analysis are not implemented."
+         ),
+         "input": {
+             "language": request.language,
+@@ -84,8 +140,25 @@ def analyze_text(request: TextAnalysisRequest):
+             "candidate_claims": claims,
+             "credibility_indicators": credibility_indicators,
+             "emotional_analysis": emotional_analysis,
+-            "logical_fallacy_analysis": logical_fallacy_analysis,
+-            "source_author_analysis": source_author_analysis,
++            "logical_fallacy_analysis": (
++                logical_fallacy_analysis
++            ),
++            "source_author_analysis": (
++                source_author_analysis
++            ),
+             "evidence_for_claims": evidence_for_claims,
++            "evidence_search_summary": {
++                "total_candidate_claims": len(claims),
++                "searched_claims": searched_claim_count,
++                "unsearched_claims": (
++                    unsearched_claim_count
++                ),
++                "maximum_claims_per_request": (
++                    MAX_EVIDENCE_CLAIMS
++                ),
++            },
++            "provenance_analysis_status": (
++                provenance_status
++            ),
+         },
+     }

@@ -18,6 +18,7 @@ function TextScanner() {
   const [language, setLanguage] = useState('auto')
   const [status, setStatus] = useState('idle')
   const [message, setMessage] = useState('')
+  const [result, setResult] = useState(null)
 
   // Retrieve a claim transferred from the Dashboard
   useEffect(() => {
@@ -66,6 +67,7 @@ function TextScanner() {
     setText('')
     setStatus('idle')
     setMessage('')
+    setResult(null)
   }
 
   // Clipboard paste
@@ -77,6 +79,7 @@ function TextScanner() {
         setText(clipboardText.slice(0, 5000))
         setStatus('idle')
         setMessage('')
+        setResult(null)
       }
     } catch {
       setMessage('Clipboard access is unavailable. Please paste your text manually.')
@@ -88,21 +91,61 @@ function TextScanner() {
     setText(sampleText)
     setStatus('idle')
     setMessage('')
+    setResult(null)
   }
 
   // Investigation action
-  const handleInvestigate = () => {
-    if (!text.trim()) {
-      setMessage('Please enter a claim before starting an investigation.')
-      return
+  const handleInvestigate = async () => {
+    console.log("Investigate button clicked");
+  if (!text.trim()) {
+    setMessage('Please enter a claim before starting an investigation.')
+    setStatus('error')
+    return
+  }
+
+  setStatus('loading')
+  setMessage('')
+  setResult(null)
+
+  try {
+    const response = await fetch(
+      'http://127.0.0.1:8000/api/v1/analyze/text',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          text: text.trim(),
+          language: language,
+          domain: 'auto',
+          include_provenance: false,
+        }),
+      }
+    )
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      const errorMessage =
+        typeof data.detail === 'string'
+          ? data.detail
+          : 'The backend could not process this request.'
+
+      throw new Error(errorMessage)
     }
 
-    // Real backend integration will be added later.
-    setStatus('pending')
+    setResult(data)
+    setStatus('success')
+  } catch (error) {
+    setStatus('error')
+
     setMessage(
-      'Your claim is ready. The GLUCO analysis engine is not connected yet. No factual verdict has been generated.'
+      error.message ||
+        'Unable to connect to the backend. Please check that the API server is running.'
     )
   }
+}
 
   return (
     <div className="flex flex-col gap-7">
@@ -195,6 +238,7 @@ function TextScanner() {
               setText(event.target.value)
               setStatus('idle')
               setMessage('')
+              setResult(null)
             }}
             placeholder="Paste a WhatsApp message, news headline or suspicious viral claim here..."
             rows={8}
@@ -275,39 +319,33 @@ function TextScanner() {
 
       </section>
 
-      {/* Investigation Status */}
-      {status === 'pending' && (
+      
+{/* Investigation Status */}
+{status === 'loading' && (
+  <section className="bg-surface-container-low border border-primary/20 rounded-xl p-5">
+    <div className="flex items-start gap-3">
+      <AlertCircle className="text-primary-strong shrink-0 mt-0.5" size={21} />
 
-        <section className="bg-surface-container-low border border-primary/20 rounded-xl p-5">
+      <div>
+        <h3 className="font-semibold text-on-surface">
+          Analyzing Content...
+        </h3>
 
-          <div className="flex items-start gap-3">
+        <p className="text-sm text-on-surface-variant mt-2 leading-relaxed">
+          Sending your text to the analysis engine. Please wait.
+        </p>
 
-            <AlertCircle className="text-primary-strong shrink-0 mt-0.5" size={21} />
+        <p className="text-xs text-outline mt-3">
+          Preliminary investigation · No final verdict
+        </p>
+      </div>
+    </div>
+  </section>
+)}
 
-            <div>
-
-              <h3 className="font-semibold text-on-surface">
-                Investigation Prepared
-              </h3>
-
-              <p className="text-sm text-on-surface-variant mt-2 leading-relaxed">
-                {message}
-              </p>
-
-              <p className="text-xs text-outline mt-3">
-                Backend integration pending · No verdict available
-              </p>
-
-            </div>
-
-          </div>
-
-        </section>
-
-      )}
 
       {/* General Message */}
-      {message && status !== 'pending' && (
+      {message && status !== 'loading' && (
 
         <div className="flex items-center gap-3 bg-surface-container-low border border-outline-variant/30 rounded-lg p-4">
 
@@ -320,6 +358,34 @@ function TextScanner() {
         </div>
 
       )}
+      
+{/* Analysis Results */}
+{result && (
+  <section className="bg-surface-container-low rounded-xl p-5 border border-outline-variant/20">
+    <h2 className="text-xl font-semibold mb-3">
+      Analysis Results
+    </h2>
+
+    <p className="text-sm text-on-surface-variant mb-5 leading-relaxed">
+      {result.message}
+    </p>
+
+    <div className="rounded-lg bg-surface-container-lowest p-4 overflow-x-auto">
+      <h3 className="font-semibold text-sm mb-3">
+        Investigation Data
+      </h3>
+
+      <pre className="whitespace-pre-wrap break-words text-xs leading-relaxed text-on-surface-variant">
+        {JSON.stringify(result.input, null, 2)}
+      </pre>
+    </div>
+
+    <p className="text-xs text-amber-400 mt-4 leading-relaxed">
+      Preliminary analysis only. Evidence candidates and textual
+      indicators are not verified facts or a final truth verdict.
+    </p>
+  </section>
+)}
 
       {/* Investigation Information */}
       <section className="grid min-w-0 grid-cols-1 md:grid-cols-2 items-stretch gap-4">
